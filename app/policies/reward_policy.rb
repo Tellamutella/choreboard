@@ -1,7 +1,7 @@
 class RewardPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.all
+      user.rewards # list of user's rewards, scope.all is just Reward.all
     end
   end
 
