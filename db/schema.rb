@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_19_140829) do
+ActiveRecord::Schema.define(version: 2018_11_20_041931) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,4 +41,56 @@ ActiveRecord::Schema.define(version: 2018_11_19_140829) do
     t.index ["reset_password_token"], name: "index_parents_on_reset_password_token", unique: true
   end
 
+  create_table "reward_requests", force: :cascade do |t|
+    t.bigint "reward_id"
+    t.integer "state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reward_id"], name: "index_reward_requests_on_reward_id"
+  end
+
+  create_table "rewards", force: :cascade do |t|
+    t.bigint "parent_id"
+    t.bigint "child_id"
+    t.integer "price"
+    t.string "name"
+    t.text "details"
+    t.boolean "daily", default: false
+    t.boolean "claimed", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["child_id"], name: "index_rewards_on_child_id"
+    t.index ["parent_id"], name: "index_rewards_on_parent_id"
+  end
+
+  create_table "task_submissions", force: :cascade do |t|
+    t.bigint "task_id"
+    t.text "comment"
+    t.integer "state"
+    t.bigint "reward_request_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reward_request_id"], name: "index_task_submissions_on_reward_request_id"
+    t.index ["task_id"], name: "index_task_submissions_on_task_id"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.bigint "parent_id"
+    t.string "objective"
+    t.text "key_results"
+    t.bigint "child_id"
+    t.boolean "mandatory", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["child_id"], name: "index_tasks_on_child_id"
+    t.index ["parent_id"], name: "index_tasks_on_parent_id"
+  end
+
+  add_foreign_key "reward_requests", "rewards"
+  add_foreign_key "rewards", "children"
+  add_foreign_key "rewards", "parents"
+  add_foreign_key "task_submissions", "reward_requests"
+  add_foreign_key "task_submissions", "tasks"
+  add_foreign_key "tasks", "children"
+  add_foreign_key "tasks", "parents"
 end
