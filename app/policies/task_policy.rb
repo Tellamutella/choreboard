@@ -1,7 +1,7 @@
 class TaskPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.all
+      user.tasks
     end
   end
 end

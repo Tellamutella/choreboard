@@ -4,4 +4,6 @@ class Parent < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :children
+  has_many :tasks
+  has_many :rewards
 end
