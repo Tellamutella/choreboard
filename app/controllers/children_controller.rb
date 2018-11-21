@@ -1,6 +1,6 @@
 class ChildrenController < ApplicationController
   skip_before_action :authenticate_child!, only: %i[new create]
-
+  skip_before_action :authenticate_parent!, only: :playground
   def playground
   end
 
