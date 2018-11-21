@@ -1,0 +1,16 @@
+<div class="home-container">
+  <div class="home-row"">
+    <div class=" col-xs-6 col-md-6 col-lg-6" id="home-padding">
+      <div class="home-banner" style="background-color: #f4decb;">
+        <a class="home-btn">For Adults</a>
+      </div>
+    </div>
+  </div>
+  <div class="home-row">
+    <div class="col-xs-6 col-md-6 col-lg-6" id="home-padding">
+      <div class="home-banner" style="background-image:  url('https://www.lego.com/portalskins/lego.com-css/1.0.0/assets/split__kids-art.9b8a13e0f62badb14f7c0696cf0419e8.png');">
+        <a class="home-btn">For Kids</a>
+      </div>
+    </div>
+  </div>
+</div>
