@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   post '/children', to: 'children#create', as: :child
 
   resources :tasks do
-    resources :task_submissions, only: :create
+    resources :task_submissions, only: [:create, :new]
   end
 
   resources :rewards do
