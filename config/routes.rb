@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :children
   devise_for :parents
+
   root to: 'pages#home'
 
   get 'dashboard', to: 'parents#dashboard'
