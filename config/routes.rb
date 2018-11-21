@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   root to: 'pages#home'
 
+
   get 'dashboard', to: 'parents#dashboard'
   get 'playground', to: 'children#playground'
 
@@ -18,3 +19,11 @@ Rails.application.routes.draw do
     resources :reward_requests, only: :create
   end
 end
+
+
+#root --- /
+
+
+#devise -- runs log-in on your sites -- often used with user model--which stores the user database
+#le-wagon template -- has auto built user into it but otherwise have create it yourself --through documentations
+
