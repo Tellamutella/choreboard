@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_21_050854) do
+ActiveRecord::Schema.define(version: 2018_11_21_074947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,10 +71,13 @@ ActiveRecord::Schema.define(version: 2018_11_21_050854) do
   create_table "task_submissions", force: :cascade do |t|
     t.bigint "task_id"
     t.text "comment"
-    t.integer "state"
+    t.integer "state", default: 0
     t.bigint "reward_request_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "child_id"
+    t.string "photo"
+    t.index ["child_id"], name: "index_task_submissions_on_child_id"
     t.index ["reward_request_id"], name: "index_task_submissions_on_reward_request_id"
     t.index ["task_id"], name: "index_task_submissions_on_task_id"
   end
@@ -95,6 +98,7 @@ ActiveRecord::Schema.define(version: 2018_11_21_050854) do
   add_foreign_key "reward_requests", "rewards"
   add_foreign_key "rewards", "children"
   add_foreign_key "rewards", "parents"
+  add_foreign_key "task_submissions", "children"
   add_foreign_key "task_submissions", "reward_requests"
   add_foreign_key "task_submissions", "tasks"
   add_foreign_key "tasks", "children"
