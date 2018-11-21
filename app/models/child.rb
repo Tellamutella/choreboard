@@ -4,4 +4,5 @@ class Child < ApplicationRecord
   devise :database_authenticatable,
          :recoverable, :rememberable, :validatable
   belongs_to :parent
+  has_many :tasks
 end

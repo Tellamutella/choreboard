@@ -13,27 +13,24 @@
 <div class="tasks-info">
   <h3>Tasks:</h3>
   <div class="container">
+    <ul>
     <%  @tasks.each do |t| %>
       <li>
-        <%#= link_to task_path(t) do %>
-          <%= t.objective %>
-        <%# end %>
+        <%= t.objective %>
+        <%= t.key_results %>
       </li>
     <% end %>
   </div>
-  <div class="btn-add-task">
-    <%= link_to new_task_path do %>
-      Add a Task
-    <% end %>
-  </div>
 </div>
+
+<!-----------eventlistener on button ---->
+
 
 <!-- Trigger/Open The Modal -->
 <button id="btn-task-modal"> add task modal</button>
 
 <!-- The Modal -->
 <div id="taskModal" class="modal">
-
   <!-- Modal content -->
   <div class="modal-content">
     <span class="close">&times;</span>
@@ -45,7 +42,7 @@
   <% [child.id, child.email] %>
   <% end %>
     <%= f.input :child_id, collection: @list , label_method: :second, value_method: :first %>
-  <%= f.submit 'New user' %>
+  <%= f.submit 'Add Task' %>
 <% end %>
   </div>
 
@@ -76,17 +73,20 @@
   <div class="childrens-list">
     <% current_parent.children.each do |child| %>
       <li>
-        <%#= link_to child_path(child) do %>
-        <!-- do a modal to display child info -->
           <%= child.email %>
+          <ul>
+         <% child.tasks.each do |task| %>
+         <li>
+         <%= task.objective %>
+         </li>
+         <% end %>
+         </ul>
         <%# end %>
       </li>
     <% end %>
   </div>
 </div>
-
 </div>
-
 <script>
   var modal = document.getElementById('taskModal');
 
@@ -112,4 +112,14 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+
+
+// var test = document.getElementById('popup');
+
+// test.onclick = function () {
+//   var popup
+//     var popup = document.getElementById("myPopup");
+//     popup.classList.toggle("show");
+// }
+
 </script>
