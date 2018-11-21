@@ -1,2 +1,13 @@
-<h1>Children#playground</h1>
-<p>Find me in app/views/children/playground.html.erb</p>
+<div class="container">
+  <ul>
+<%= current_child.name %>
+<% @tasks.each do |task| %>
+<li>
+<p><%=link_to task_path(task) do %>
+<%= task.objective %>
+<% end %></p>
+<p><%= task.key_results %></p>
+</li>
+<% end %>
+</ul>
+</div>
