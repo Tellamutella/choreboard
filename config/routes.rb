@@ -15,6 +15,6 @@ Rails.application.routes.draw do
   end
 
   resources :rewards do
-    resources :reward_requests, only: :create
+    resources :reward_requests, only: [:create, :new]
   end
 end

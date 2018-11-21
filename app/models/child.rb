@@ -6,4 +6,6 @@ class Child < ApplicationRecord
   belongs_to :parent
   has_many :task_submissions
   has_many :tasks
+  has_many :reward_requests, through: :rewards
+  has_many :rewards, through: :tasks
 end
