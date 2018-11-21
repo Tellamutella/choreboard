@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_20_071432) do
+ActiveRecord::Schema.define(version: 2018_11_21_050854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,8 @@ ActiveRecord::Schema.define(version: 2018_11_20_071432) do
     t.integer "state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "child_id"
+    t.index ["child_id"], name: "index_reward_requests_on_child_id"
     t.index ["reward_id"], name: "index_reward_requests_on_reward_id"
   end
 
@@ -89,6 +91,7 @@ ActiveRecord::Schema.define(version: 2018_11_20_071432) do
     t.index ["parent_id"], name: "index_tasks_on_parent_id"
   end
 
+  add_foreign_key "reward_requests", "children"
   add_foreign_key "reward_requests", "rewards"
   add_foreign_key "rewards", "children"
   add_foreign_key "rewards", "parents"

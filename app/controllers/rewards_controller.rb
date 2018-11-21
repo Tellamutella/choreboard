@@ -1,6 +1,6 @@
 class RewardsController < ApplicationController
   skip_before_action :authenticate_parent!, only: %i[index show new create]
-    skip_before_action :authenticate_child!, only: %i[index show new create]
+  skip_before_action :authenticate_child!, only: %i[index show new create]
 
   def index
   @rewards = policy_scope(Reward).order(created_at: :desc)
