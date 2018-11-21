@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Reward.destroy_all
 Task.destroy_all
 Child.destroy_all
 Parent.destroy_all
@@ -13,3 +14,5 @@ parent1 = Parent.create!(email: 'parent@gmail.com', password: '123456', password
 child1 = Child.create!(email: 'child@gmail.com', password: '123456', password_confirmation: '123456', name: 'Cheetos Jr.', parent: parent1)
 
 task1 = Task.create!(parent: parent1, child: child1, objective: "clean room", key_results: "stuff and stuff")
+
+reward1 = Reward.create!(parent: parent1, child: child1, price: 10, name: 'test reward', details: 'old mcdonald had a farm')
