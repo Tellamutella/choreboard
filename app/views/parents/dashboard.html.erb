@@ -13,16 +13,44 @@
 <div class="tasks-info">
   <h3>Tasks:</h3>
   <div class="container">
-    <% @tasks.each do |t| %>
+    <%  @tasks.each do |t| %>
       <li>
-        <%= link_to task_path(t) do %>
+        <%#= link_to task_path(t) do %>
           <%= t.objective %>
-        <% end %>
+        <%# end %>
       </li>
+    <% end %>
+  </div>
+  <div class="btn-add-task">
+    <%= link_to new_task_path do %>
+      Add a Task
     <% end %>
   </div>
 </div>
 
+<!-- Trigger/Open The Modal -->
+<button id="btn-task-modal"> add task modal</button>
+
+<!-- The Modal -->
+<div id="taskModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+<%= simple_form_for @task do |f| %>
+  <%= f.input :objective %>
+  <%= f.input :key_results %>
+  <%= f.input :mandatory %>
+  <% @list = current_parent.children.map do |child| %>
+  <% [child.id, child.email] %>
+  <% end %>
+    <%= f.input :child_id, collection: @list , label_method: :second, value_method: :first %>
+  <%= f.submit 'New user' %>
+<% end %>
+  </div>
+
+</div>
+<!------------------------------------------->
 <div class="rewards-info">
   <h3>Rewards:</h3>
   <div class="container">
@@ -57,3 +85,30 @@
 </div>
 
 </div>
+
+<script>
+  var modal = document.getElementById('taskModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("btn-task-modal");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>

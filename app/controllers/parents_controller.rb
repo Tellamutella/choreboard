@@ -3,5 +3,6 @@ class ParentsController < ApplicationController
   def dashboard
     @tasks = policy_scope(Task)
     @rewards = policy_scope(Reward)
+    @task = current_parent.tasks.new
   end
 end
