@@ -1,0 +1,125 @@
+<!-- Dashboad components: -->
+<!-- add child button, children list with status -->
+<!-- create task button, mandatory tasks list -->
+<!-- create reward button, daily rewards list  -->
+
+<div class="container">
+<h2>Welcome!</h2>
+<!-- Check if parent (& child) logged in, for testing purpose only -->
+<h5>Logged in as: <%= current_parent.email %></h5>
+<%= current_child.email if current_child %>
+<!------->
+
+<div class="tasks-info">
+  <h3>Tasks:</h3>
+  <div class="container">
+    <ul>
+    <%  @tasks.each do |t| %>
+      <li>
+        <%= t.objective %>
+        <%= t.key_results %>
+      </li>
+    <% end %>
+  </div>
+</div>
+
+<!-----------eventlistener on button ---->
+
+
+<!-- Trigger/Open The Modal -->
+<button id="btn-task-modal"> add task modal</button>
+
+<!-- The Modal -->
+<div id="taskModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+<%= simple_form_for @task do |f| %>
+  <%= f.input :objective %>
+  <%= f.input :key_results %>
+  <%= f.input :mandatory %>
+  <% @list = current_parent.children.map do |child| %>
+  <% [child.id, child.email] %>
+  <% end %>
+    <%= f.input :child_id, collection: @list , label_method: :second, value_method: :first %>
+  <%= f.submit 'Add Task' %>
+<% end %>
+  </div>
+
+</div>
+<!------------------------------------------->
+<div class="rewards-info">
+  <h3>Rewards:</h3>
+  <div class="container">
+    <% @rewards.each do |r| %>
+      <li>
+        <%= link_to reward_path(r) do %>
+          <%= r.name %>
+        <% end %>
+      </li>
+    <% end %>
+  </div>
+</div>
+
+<hr>
+
+<div class="children-info">
+  <div class="btn-add-child">
+    <%= link_to new_child_path do %>
+      Add a child
+    <% end %>
+  </div>
+
+  <div class="childrens-list">
+    <% current_parent.children.each do |child| %>
+      <li>
+          <%= child.email %>
+          <ul>
+         <% child.tasks.each do |task| %>
+         <li>
+         <%= task.objective %>
+         </li>
+         <% end %>
+         </ul>
+        <%# end %>
+      </li>
+    <% end %>
+  </div>
+</div>
+</div>
+<script>
+  var modal = document.getElementById('taskModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("btn-task-modal");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+
+// var test = document.getElementById('popup');
+
+// test.onclick = function () {
+//   var popup
+//     var popup = document.getElementById("myPopup");
+//     popup.classList.toggle("show");
+// }
+
+</script>
