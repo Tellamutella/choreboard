@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-
+   skip_before_action :authenticate_child!, only: %i[show new create]
   def new
     @task = Task.new
     authorize @task
@@ -9,7 +9,7 @@ class TasksController < ApplicationController
     @task = current_parent.tasks.new(task_params)
     authorize @task
     if @task.save
-      redirect_to @task
+      redirect_to dashboard_path
     else
       render :new
     end
@@ -29,10 +29,11 @@ class TasksController < ApplicationController
   end
 
   def show
-
+    @task = Task.find(params[:id])
+    authorize @task
   end
 
   def task_params
-    params.require(:task).permit(:parent_id, :objective, :key_results, :child_id, :mandatory)
+    params.require(:task).permit(:objective, :key_results, :child_id, :mandatory)
   end
 end
