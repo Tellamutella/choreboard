@@ -1,5 +1,5 @@
 class TaskSubmissionsController < ApplicationController
-  before_action :authenticate_child!
+  # before_action :authenticate_child!
 
   def new
     @task_submission = TaskSubmission.new(state: 0, child: current_child)
@@ -22,25 +22,10 @@ class TaskSubmissionsController < ApplicationController
     end
   end
 
-  def approve
-    @task_submission = TaskSubmission.find(:task_id)
-    @task_submission.state = 1
+  def update
+    @task_submission = TaskSubmission.find(params[:id])
+    @task_submission.state = params[:approved] == 'true' ? 1 : -1
     @task_submission.save
-
-    if current_child.tasks.select(&:mandatory).all? {|task| task.task_submissions.any? ? task.task_submissions.last.state == 1 : false }
-      # trigger/unblock reward request
-    end
-  end
-
-  def reject(msg)
-    @task_submission = TaskSubmission.find(:task_id)
-    @task_submission.state = -1
-    @task_submission.comment = msg
-    if @task_submission.save # need to validate reject msg length
-      redirect_to dashboard_path
-    else
-      render 'tast_submissions/new'
-    end
   end
 
   private
