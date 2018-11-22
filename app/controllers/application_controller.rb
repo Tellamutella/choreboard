@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :authenticate_parent!
-  before_action :authenticate_child!
+  # before_action :authenticate_parent!
+  # before_action :authenticate_child!
   include Pundit
   alias pundit_user current_parent
 
