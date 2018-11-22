@@ -4,5 +4,6 @@ class ParentsController < ApplicationController
     @tasks = policy_scope(Task)
     @rewards = policy_scope(Reward)
     @task = current_parent.tasks.new
+    @reward = current_parent.rewards.new
   end
 end
