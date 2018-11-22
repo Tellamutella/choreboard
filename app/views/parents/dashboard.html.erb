@@ -2,110 +2,133 @@
 <!-- add child button, children list with status -->
 <!-- create task button, mandatory tasks list -->
 <!-- create reward button, daily rewards list  -->
-<div class="row">
-  <div class="col-xs-6 col-md-4">
-    <h2>Welcome!</h2>
-    <h5>(<%= current_parent.email %>)</h5>
-  </div>
-<div class="col-xs-6 col-md-4">
-  <div class="tasks-info">
-    <h3>Tasks:</h3>
-      <div class="container">
-        <ul>
-          <%  @tasks.each do |t| %>
-    <!-----button---->
-            <p id="button" class="test"><%= t.objective %></p>
-<!-- The Modal -->
-              <div id="modal>" class="modal">
-  <!-- Modal content -->
-                <div class="modal-content">
-                  <span class="close">&times;</span>
-                    <%= t.key_results %>
-                      <br>
-                      <br>
-                      <p> Example </p>
-                      <%= cl_image_tag t.photo, height: 300, width: 400, crop: :fill %>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-4">
+            <h2>Welcome!</h2>
+            <h5><%= current_parent.name %> (<%= current_parent.email %>)</h5>
+        </div>
+        <div class="col-xs-6 col-md-4">
+            <div class="tasks-info">
+                <h3>Tasks:</h3>
+                <div class="container">
+                    <ul>
+                        <%  @tasks.each do |t| %>
+                        <li>
+                            <!-----button---->
+                            <p id="button" class="test">
+                                <%= t.objective %>
+                            </p>
+                            <!-- The Modal -->
+                            <div id="modal>" class="modal">
+                                <!-- Modal content -->
+                                <div class="modal-content">
+                                    <span class="close">&times;</span>
+                                    <%= t.key_results %>
+                                    <br>
+                                    <br>
+                                    <p> Example </p>
+                                    <%= cl_image_tag t.photo, height: 300, width: 400, crop: :fill %>
+                                </div>
+                            </div>
+                        </li>
+                        <% end %>
+                    </ul>
+                    <!-- Trigger/Open The Modal -->
+                    <p id="button" class="test">Add Tasks</p>
+                    <!-- The Modal -->
+                    <div id="taskModal" class="modal">
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <%= simple_form_for @task do |f| %>
+                            <%= f.input :objective %>
+                            <%= f.input :key_results %>
+                            <%= f.input :mandatory %>
+                            <% @list = current_parent.children.map do |child| %>
+                            <% [child.id, child.email] %>
+                            <% end %>
+                            <%= f.input :child_id, collection: @list , label_method: :second, value_method: :first %>
+                            <%= f.input :photo %>
+                            <%= f.input :photo_cache, as: :hidden %>
+                            <%= f.submit 'Add Task' %>
+                            <% end %>
+                        </div>
+                    </div>
                 </div>
-              </div>
-          <% end %>
-<!-- Trigger/Open The Modal -->
-            <p id="button" class="test">Add Tasks</p>
-<!-- The Modal -->
-              <div id="taskModal" class="modal">
-  <!-- Modal content -->
-                <div class="modal-content">
-                  <span class="close">&times;</span>
-                    <%= simple_form_for @task do |f| %>
-                      <%= f.input :objective %>
-                      <%= f.input :key_results %>
-                      <%= f.input :mandatory %>
-                      <% @list = current_parent.children.map do |child| %>
-                      <% [child.id, child.email] %>
-                      <% end %>
-                        <%= f.input :child_id, collection: @list , label_method: :second, value_method: :first %>
-                      <%= f.input :photo %>
-                      <%= f.input :photo_cache, as: :hidden %>
-                      <%= f.submit 'Add Task' %>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-4">
+            <div class="rewards-info">
+                <h3>Rewards:</h3>
+                <div class="container">
+                    <% @rewards.each do |r| %>
+                    <%= r.name %>
+                    <% end %>
+                    <p id="button" class="test">Add Rewards</p>
+                    <!-- The Modal -->
+                    <div id="taskModal" class="modal">
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <%= simple_form_for [@reward] do |f| %>
+                            <%= f.input :name , label: 'Reward'%>
+                            <%= f.input :details %>
+                            <%= f.input :price , label: 'Points needed'%>
+                            <%= f.input :child_id, collection: @list , label_method: :second, value_method: :first %>
+                            <%= f.button :button, type: :submit %>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <h2>Children</h2>
+            <div class="children-info">
+                <div class="btn-add-child">
+                    <%= link_to new_child_path do %>
+                    Add a child
                     <% end %>
                 </div>
-
-              </div>
+                <div class="childrens-list">
+                    <ul>
+                        <% current_parent.children.each do |child| %>
+                        <li>
+                            <h5><%= child.name %></h5>
+                            <div class="container">
+                                <% child.tasks.each do |task| %>
+                                <h5><%= icon('fas', 'chevron-right') %> <%= task.objective %></h5>
+                                <% if task.task_submissions.any? %>
+                                <% task.task_submissions.each do |submission| %>
+                                <div class="container">
+                                    <!-- buttons to approve/disapprove -->
+                                    <span>
+                                    <%= icon('fas', 'check') %> Approve</span>
+                                    <span><%= icon('fas', 'times') %> Disapprove</span>
+                                    <!--  -->
+                                    <p>
+                                        <%= submission.comment %>
+                                    </p>
+                                    <% if submission.photo %>
+                                    <%= submission.photo %>
+                                    <% end %>
+                                </div>
+                                <% end %>
+                                <% end %>
+                                <% end %>
+                            </div>
+                        </li>
+                        <% end %>
+                    </ul>
+                </div>
             </div>
-          </div>
         </div>
-      <div class="col-xs-6 col-md-4">
-        <div class="rewards-info">
-          <h3>Rewards:</h3>
-            <div class="container">
-              <% @rewards.each do |r| %>
-                  <%= r.name %>
-              <% end %>
-            <p id="button" class="test">Add Rewards</p>
-<!-- The Modal -->
-          <div id="taskModal" class="modal">
-  <!-- Modal content -->
-            <div class="modal-content">
-              <span class="close">&times;</span>
-                <%= simple_form_for [@reward] do |f| %>
-                <%= f.input :name , label: 'Reward'%>
-                <%= f.input :details %>
-                <%= f.input :price , label: 'Points needed'%>
-                <%= f.input :child_id, collection: @list , label_method: :second, value_method: :first %>
-                <%= f.button :button, type: :submit %>
-                <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
-        <div class="children-info">
-          <div class="btn-add-child">
-            <%= link_to new_child_path do %>
-              Add a child
-            <% end %>
-          </div>
-            <div class="childrens-list">
-              <ul>
-                <% current_parent.children.each do |child| %>
-                <li>
-                    <p>Child: <%= child.email %></p>
-                      <% child.tasks.each do |task| %>
-                     <p>Task: <%= task.objective %></p>
-                     <% end %>
-                </li>
-                <% end %>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
-
+    </div>
+</div>
 <!------------------------------------------->
-
 <script>
-  let modal = document.getElementsByClassName('modal');
+let modal = document.getElementsByClassName('modal');
 
 // Get the button that opens the modal
 // let btn = document.getElementById("btn-task-modal");
@@ -135,24 +158,26 @@
 let test = document.querySelectorAll(".test")
 
 let myFunction = function(i) {
-   modal[i].style.display = "block";
+    modal[i].style.display = "block";
 };
 
 for (let i = 0; i < test.length; i++) {
     test[i].onclick = function(event) {
-      console.log(event.target)
-      myFunction(Array.from(test).indexOf(event.target))};
+        console.log(event.target)
+        myFunction(Array.from(test).indexOf(event.target))
+    };
 }
 
 let closes = document.querySelectorAll(".close")
 
 let closeModal = function(i) {
-   modal[i].style.display = "none";
+    modal[i].style.display = "none";
 };
 
 for (let i = 0; i < closes.length; i++) {
     closes[i].onclick = function(event) {
-      closeModal(Array.from(closes).indexOf(event.target))};
+        closeModal(Array.from(closes).indexOf(event.target))
+    };
 }
 
 
@@ -163,7 +188,4 @@ for (let i = 0; i < closes.length; i++) {
 //     let popup = document.getElementById("myPopup");
 //     popup.classList.toggle("show");
 // }
-
 </script>
-
-

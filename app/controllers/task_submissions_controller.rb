@@ -23,24 +23,24 @@ class TaskSubmissionsController < ApplicationController
   end
 
   def approve
-    # @task_submission = TaskSubmission.find(:task_id)
-    # @task_submission.state = 1
-    # @task_submission.save
+    @task_submission = TaskSubmission.find(:task_id)
+    @task_submission.state = 1
+    @task_submission.save
 
-    # @mandatory_task = @task.where(mandatory: true, child: current_child)
-    # @mandatory_task.each do |task|
-    # if task.state < 1
-
-    # set state of task_submission = 1
-    # save submission
-    # check if all mandatory task complete
-    # if yes: trigger reward request, if no: do nothing
+    if current_child.tasks.select(&:mandatory).all? {|task| task.task_submissions.any? ? task.task_submissions.last.state == 1 : false }
+      # trigger/unblock reward request
+    end
   end
 
-  def reject
-    # set state of task_submission = -1
-    # set comment to something
-    # save submission
+  def reject(msg)
+    @task_submission = TaskSubmission.find(:task_id)
+    @task_submission.state = -1
+    @task_submission.comment = msg
+    if @task_submission.save # need to validate reject msg length
+      redirect_to dashboard_path
+    else
+      render 'tast_submissions/new'
+    end
   end
 
   private
