@@ -1,41 +1,55 @@
 // Specific CSS for your home-page
+body {
+  background-color: white;
+}
+
 .homepage-banner {
-  background-size: cover;
-  height: 100vh;
+  border: 3px solid yellow;
+  background-position: right;
+  background-repeat: no-repeat;
+  height: 70vh;
+  background-color: rgba(251, 232, 230, 0.8);
+}
+
+.banner-text {
+  border: 1px solid black;
+  padding: 30px;
+  width: 40%;
+  position: absolute;
+  top: 20%;
+  left: 10%;
 }
 
 .img-group, .img-group-odd {
   // borders are for testing purpose
-  // border-top: 3px solid black;
-  // border-bottom: 3px solid black;
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
   margin: 100px auto;
 }
 
 .img-group {
   // borders are for testing purpose
-  // border-right: 3px solid black;
+  border-right: 3px solid black;
 }
 
 .img-group-odd {
   // borders are for testing purpose
-  // border-left: 3px solid black;
+  border-left: 3px solid black;
 }
 
 .img-text-combo {
+  margin: 0;
+  padding: 0;
   display: flex;
 }
 
 .img-gifs, .text-card {
   width: 100%;
+  height: 100%;
   // borders are for testing purpose
-  // border: 3px solid red;
+  border: 3px solid red;
 }
 
 
 .text-card {
-
-  h5 {
-    font-size: 26px;
-  }
-
 }

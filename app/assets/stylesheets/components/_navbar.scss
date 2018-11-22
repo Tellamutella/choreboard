@@ -11,18 +11,12 @@
 }
 
 /* Logo */
-.navbar-wagon-brand img {
+.site-logo img {
   height: 50px;
 }
 
-/* User Avatar */
-.navbar-wagon .avatar {
-  height: 35px;
-  width: 35px;
-  border-radius: 50%;
-}
 
-/* Right section */
+// /* Right section */
 .navbar-wagon-right {
   display: flex;
   align-items: center;
@@ -35,7 +29,7 @@
   padding: 0 20px;
 }
 
-/* Navbar link */
+// /* Navbar link */
 .navbar-wagon-link {
   color: #616668;
   font-size: 14px;

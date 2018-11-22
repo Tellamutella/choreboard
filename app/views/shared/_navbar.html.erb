@@ -1,78 +1,66 @@
 <div class="navbar-wagon">
-  <!-- Logo -->
-  <%= link_to root_path, class: "choreboard-logo" do %>
-  <%= icon('fas', 'frog') %>
-  <% end %>
-  <!-- Right Navigation -->
-  <div class="navbar-wagon-right hidden-xs hidden-sm">
-    <ul class="list-inline">
-      <% if parent_signed_in? %>
-      <li>
-        <%= link_to 'Dashboard', dashboard_path %>
-      </li>
-      <li>
-        <%= link_to destroy_parent_session_path, method: :delete do %>
-        <%= t(".sign_out", default: "Log out") %>
-        <% end %>
-      </li>
-      <% elsif child_signed_in? %>
-      <li>
-        <%= link_to 'Playground', playground_path %>
-      </li>
-      <li>
-        <%= link_to destroy_child_session_path, method: :delete do %>
-        <%= t(".sign_out", default: "Log out") %>
-        <% end %>
-      </li>
-      <% else %>
-      <li>
-        <%= link_to t(".sign_up", default: "Sign up"), new_parent_registration_path %>
-      </li>
-      <li>
-        <%= link_to t(".sign_in", default: "Parent Login"), new_parent_session_path %>
-      </li>
-      <li>
-        <%= link_to t(".sign_in", default: "Child Login"), new_child_session_path %>
-      </li>
-      <% end %>
-    </ul>
-  </div>
-  <!-- Dropdown list appearing on mobile only -->
-  <div class="navbar-wagon-item hidden-md hidden-lg">
-    <div class="dropdown">
-      <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
-      <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+    <!-- Logo -->
+    <%= link_to root_path, class: "site-logo" do %>
+    <%= image_tag "logo.png" %>
+    <% end %>
+    <!-- Right Navigation -->
+    <div class="navbar-wagon-right hidden-xs hidden-sm">
         <% if parent_signed_in? %>
-        <li>
-          <%= link_to 'Dashboard', dashboard_path %>
-        </li>
-        <li>
-          <%= link_to destroy_parent_session_path, method: :delete do %>
-          <%= t(".sign_out", default: "Log out") %>
-          <% end %>
-        </li>
-        <% elsif child_signed_in? %>
-        <li>
-          <%= link_to 'Playground', playground_path %>
-        </li>
-        <li>
-          <%= link_to destroy_child_session_path, method: :delete do %>
-          <%= t(".sign_out", default: "Log out") %>
-          <% end %>
-        </li>
-        <% else %>
-        <li>
-          <%= link_to t(".sign_up", default: "Sign up"), new_parent_registration_path %>
-        </li>
-        <li>
-          <%= link_to t(".sign_in", default: "Parent Login"), new_parent_session_path %>
-        </li>
-        <li>
-          <%= link_to t(".sign_in", default: "Child Login"), new_child_session_path %>
-        </li>
+        <%= link_to 'Dashboard', dashboard_path, class: "navbar-wagon-item navbar-wagon-link" %>
+        <%= link_to destroy_parent_session_path, class: "navbar-wagon-item navbar-wagon-link", method: :delete do %>
+        <%= t(".sign_out", default: "Log out") %>
         <% end %>
-      </ul>
+        <% elsif child_signed_in? %>
+        <div class="navbar-wagon-item navbar-wagon-link">
+            <%= link_to 'Playground', playground_path, class: "navbar-wagon-item navbar-wagon-link" %>
+            <%= link_to destroy_child_session_path, class: "navbar-wagon-item navbar-wagon-link", method: :delete do %>
+            <%= t(".sign_out", default: "Log out") %>
+            <% end %>
+        </div>
+        <% else %>
+        <%= link_to t(".sign_up", default: "Sign up"), new_parent_registration_path, class: "navbar-wagon-item navbar-wagon-link" %>
+        <%= link_to t(".sign_in", default: "Parent Login"), new_parent_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
+        <%= link_to t(".sign_in", default: "Child Login"), new_child_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
+        <% end %>
     </div>
-  </div>
+</div>
+<!-- Dropdown list appearing on mobile only -->
+<div class="navbar-wagon-item hidden-md hidden-lg">
+    <div class="dropdown">
+        <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
+        <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+            <% if parent_signed_in? %>
+            <li>
+                <%= link_to 'Dashboard', dashboard_path %>
+            </li>
+            <li>
+                <%= link_to destroy_parent_session_path, method: :delete do %>
+                <%= t(".sign_out", default: "Log out") %>
+                <% end %>
+            </li>
+            <% elsif child_signed_in? %>
+            <li>
+                <%= link_to 'Playground', playground_path %>
+            </li>
+            <li>
+                <%= link_to destroy_child_session_path, method: :delete do %>
+                <%= t(".sign_out", default: "Log out") %>
+                <% end %>
+            </li>
+            <% else %>
+            <li>
+                <%= link_to t(".sign_up", default: "Sign up"), new_parent_registration_path %>
+            </li>
+            <li>
+                <%= link_to t(".sign_in", default: "Parent Login"), new_parent_session_path %>
+            </li>
+            <li>
+                <%= link_to t(".sign_in", default: "Child Login"), new_child_session_path %>
+            </li>
+            <% end %>
+        </ul>
+    </div>
+</div>
+
 </div>
 
