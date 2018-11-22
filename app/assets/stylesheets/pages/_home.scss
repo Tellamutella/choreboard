@@ -1,1 +1,41 @@
 // Specific CSS for your home-page
+.homepage-banner {
+  background-size: cover;
+  height: 100vh;
+}
+
+.img-group, .img-group-odd {
+  // borders are for testing purpose
+  // border-top: 3px solid black;
+  // border-bottom: 3px solid black;
+  margin: 100px auto;
+}
+
+.img-group {
+  // borders are for testing purpose
+  // border-right: 3px solid black;
+}
+
+.img-group-odd {
+  // borders are for testing purpose
+  // border-left: 3px solid black;
+}
+
+.img-text-combo {
+  display: flex;
+}
+
+.img-gifs, .text-card {
+  width: 100%;
+  // borders are for testing purpose
+  // border: 3px solid red;
+}
+
+
+.text-card {
+
+  h5 {
+    font-size: 26px;
+  }
+
+}

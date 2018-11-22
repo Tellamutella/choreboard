@@ -5,11 +5,9 @@
 
 <div class="container">
 <h2>Welcome!</h2>
-<!-- Check if parent (& child) logged in, for testing purpose only -->
-<h5>Logged in as: <%= current_parent.email %></h5>
-<%= current_child.email if current_child %>
-<!------->
+<h5>(<%= current_parent.email %>)</h5>
 
+<hr>
 <div class="tasks-info">
   <h3>Tasks:</h3>
   <div class="container">
