@@ -5,14 +5,17 @@ class RewardsController < ApplicationController
   def index
   @rewards = policy_scope(Reward).order(created_at: :desc)
   end
+
   def show
     @reward = Reward.find(params[:id])
     authorize @reward
   end
+
   def new
     @reward = Reward.new
     authorize @reward
   end
+
   def create
     @reward = Reward.new(reward_params)
     @reward.parent = current_parent
@@ -24,9 +27,6 @@ class RewardsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
     if @reward.update(reward_params)
       redirect_to reward_path(@cocktail)
@@ -35,8 +35,8 @@ class RewardsController < ApplicationController
     end
   end
 
-  def destroy
-  end
+  # def destroy
+  # end
 
   private
 

@@ -1,12 +1,4 @@
 class RewardRequestsController < ApplicationController
-  before_action :authenticate_child!
-  # def new
-  #   @reward_request = RewardRequest.new(state: -1, child: current_child)
-  #   authorize @reward_request
-  #   @rewards = Reward.where(daily: true).where(child: current_child)
-  #   @reward = Reward.find(params[:reward_id])
-  # end
-
   def create
     @reward = Reward.find(params[:reward_id])
     @reward_request = @reward.reward_requests.new(state: 0)
@@ -16,11 +8,5 @@ class RewardRequestsController < ApplicationController
     else
       raise
     end
-  end
-
-  private
-
-  def reward_request_params
-    params.require(:reward_request).permit(:reward_id)
   end
 end
