@@ -9,10 +9,4 @@ class RewardRequestsController < ApplicationController
       raise
     end
   end
-
-  private
-
-  def reward_request_params
-    params.require(:reward_request).permit(:reward_id)
-  end
 end

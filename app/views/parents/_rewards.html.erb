@@ -1,9 +1,11 @@
 <div class="rewards-info">
   <h3>Rewards:</h3>
   <div class="container">
+
     <% @rewards.each do |r| %>
-    <%= r.name %>
+     <div><%= r.name %></div>
     <% end %>
+
     <div class="test btn-add-object">Add Rewards</div>
     <!-- The Modal -->
     <div class="modal">
@@ -15,6 +17,7 @@
         <%= f.input :details %>
         <%= f.input :price , label: 'Points needed'%>
         <%= f.input :child_id, collection: @list , label_method: :second, value_method: :first %>
+        <%= f.input :daily %>
         <%= f.button :button, type: :submit %>
         <% end %>
       </div>
