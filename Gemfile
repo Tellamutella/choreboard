@@ -19,6 +19,7 @@ gem 'webpacker'
 gem 'devise'
 gem "pundit"
 gem 'cloudinary'
+gem 'rest-client', '~> 2.0', '>= 2.0.2'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
