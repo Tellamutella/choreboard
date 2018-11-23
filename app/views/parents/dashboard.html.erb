@@ -1,4 +1,4 @@
-<!-- Dashboad components: -->
+ƒ<!-- Dashboad components: -->
 <!-- add child button, children list with status -->
 <!-- create task button, mandatory tasks list -->
 <!-- create reward button, daily rewards list  -->
@@ -69,7 +69,7 @@
                             <h5><%= child.name %></h5>
                             <div class="container">
                                 <% child.tasks.each do |task| %>
-                                <h5><%= icon('fas', 'chevron-right') %> <%= task.objective %></h5>
+                                <h5><%= icon('fas', 'chevron-right') %> Task: <%= task.objective %></h5>
                                 <% if task.task_submissions.any? %>
                                 <% task.task_submissions.each do |submission| %>
                                 <div class="container">
@@ -88,10 +88,10 @@
                                     <% end %>
                                     <!--  -->
                                     <p>
-                                        <%= submission.comment %>
+                                        comment: <%= submission.comment %>
                                     </p>
                                     <% if submission.photo %>
-                                    <%= submission.photo %>
+                                    <%= cl_image_tag submission.photo, height: 300, width: 400, crop: :fill %>
                                     <% end %>
                                 </div>
                                 <% end %>

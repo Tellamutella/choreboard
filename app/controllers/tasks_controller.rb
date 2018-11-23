@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
-   skip_before_action :authenticate_parent!
-   skip_before_action :authenticate_child!, only: %i[show new create]
+   # skip_before_action :authenticate_parent!
+   # skip_before_action :authenticate_child!, only: %i[show new create]
   def new
     @task = Task.new
     authorize @task
