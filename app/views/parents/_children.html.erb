@@ -1,0 +1,49 @@
+<div class="children-info">
+    <h3>Children</h3>
+    <div class="btn-add-object">
+        <%= link_to new_child_path do %>
+        Add a child
+        <% end %>
+    </div>
+    <div class="childrens-list">
+        <ul>
+            <% current_parent.children.each do |child| %>
+            <li>
+                <h5><%= child.name %></h5>
+                <div class="container">
+                    <% child.tasks.each do |task| %>
+                    <h5><%= icon('fas', 'chevron-right') %> Task: <%= task.objective %></h5>
+                    <% if task.task_submissions.any? %>
+                    <% task.task_submissions.each do |submission| %>
+                    <div class="container">
+                        <!-- buttons to approve/disapprove -->
+                        <% if submission.state == 0 %>
+                        <span>
+                                    <%= link_to task_task_submission_path(task, submission, approved: true), remote: true, method: :patch do %>
+                                    <%= icon('fas', 'check') %> Approve
+                                    <% end %></span>
+                        <span>
+                                      <%= link_to task_task_submission_path(task, submission, approved: false), remote: true, method: :patch do %>
+                                      <%= icon('fas', 'times') %> Disapprove
+                                      <% end %></span>
+                        <% else %>
+                        <%= submission.state > 0 ? "- Approved" : "- Disapproved" %>
+                        <% end %>
+                        <!--  -->
+                        <p>
+                            comment:
+                            <%= submission.comment %>
+                        </p>
+                        <% if submission.photo %>
+                        <%= cl_image_tag submission.photo, height: 300, width: 400, crop: :fill %>
+                        <% end %>
+                    </div>
+                    <% end %>
+                    <% end %>
+                    <% end %>
+                </div>
+            </li>
+            <% end %>
+        </ul>
+    </div>
+</div>

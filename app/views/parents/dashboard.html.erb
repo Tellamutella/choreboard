@@ -1,4 +1,4 @@
-ƒ<!-- Dashboad components: -->
+<!-- Dashboad components: -->
 <!-- add child button, children list with status -->
 <!-- create task button, mandatory tasks list -->
 <!-- create reward button, daily rewards list  -->
@@ -9,100 +9,14 @@
             <h5><%= current_parent.name %> (<%= current_parent.email %>)</h5>
         </div>
         <div class="col-xs-6 col-md-4">
-            <div class="tasks-info">
-                <h3>Tasks:</h3>
-                <div class="container">
-                    <ul>
-                        <%  @tasks.each do |t| %>
-                        <!-----button---->
-                        <p id="button" class="test">
-                            <%= t.objective %>
-                        </p>
-                        <!-- The Modal -->
-                        <div id="modal>" class="modal">
-                            <!-- Modal content -->
-                            <div class="modal-content">
-                                <span class="close">&times;</span>
-                                <%= t.key_results %>
-                                <br>
-                                <br>
-                                <p> Example </p>
-                                <%= cl_image_tag t.photo, height: 300, width: 400, crop: :fill %>
-                            </div>
-                        </div>
-                        <% end %>
-                        <!-- Trigger/Open The Modal -->
-                        <p id="button" class="test">Add Tasks</p>
-                        <!-- The Modal -->
-                        <div id="taskModal" class="modal">
-                            <!-- Modal content -->
-                            <div class="modal-content">
-                                <span class="close">&times;</span>
-                                <%= simple_form_for @task do |f| %>
-                                <%= f.input :objective %>
-                                <%= f.input :key_results %>
-                                <%= f.input :mandatory %>
-                                <% @list = current_parent.children.map do |child| %>
-                                <% [child.id, child.email] %>
-                                <% end %>
-                                <%= f.input :child_id, collection: @list , label_method: :second, value_method: :first %>
-                                <%= f.input :photo %>
-                                <%= f.input :photo_cache, as: :hidden %>
-                                <%= f.submit 'Add Task' %>
-                                <% end %>
-                            </div>
-                        </div>
-                </div>
-            </div>
+            <%= render 'tasks' %>
         </div>
         <div class="col-xs-6 col-md-4">
             <%= render 'rewards' %>
         </div>
         <div class="col-xs-12">
-            <h2>Children</h2>
-            <div class="children-info">
-                <%= render 'addchild' %>
-                <div class="childrens-list">
-                    <ul>
-                        <% current_parent.children.each do |child| %>
-                        <li>
-                            <h5><%= child.name %></h5>
-                            <div class="container">
-                                <% child.tasks.each do |task| %>
-                                <h5><%= icon('fas', 'chevron-right') %> Task: <%= task.objective %></h5>
-                                <% if task.task_submissions.any? %>
-                                <% task.task_submissions.each do |submission| %>
-                                <div class="container">
-                                    <!-- buttons to approve/disapprove -->
-                                    <% if submission.state == 0 %>
-                                    <span>
-                                    <%= link_to task_task_submission_path(task, submission, approved: true), remote: true, method: :patch do %>
-                                    <%= icon('fas', 'check') %> Approve
-                                    <% end %></span>
-                                    <span>
-                                      <%= link_to task_task_submission_path(task, submission, approved: false), remote: true, method: :patch do %>
-                                      <%= icon('fas', 'times') %> Disapprove
-                                      <% end %></span>
-                                    <% else %>
-                                    <%= submission.state > 0 ? "- Approved" : "- Disapproved" %>
-                                    <% end %>
-                                    <!--  -->
-                                    <p>
-                                        comment: <%= submission.comment %>
-                                    </p>
-                                    <% if submission.photo %>
-                                    <%= cl_image_tag submission.photo, height: 300, width: 400, crop: :fill %>
-                                    <% end %>
-                                </div>
-                                <% end %>
-                                <% end %>
-                                <% end %>
-                            </div>
-                        </li>
-                        <% end %>
-                    </ul>
-                </div>
-            </div>
+            <%= render 'children' %>
+
         </div>
     </div>
 </div>
