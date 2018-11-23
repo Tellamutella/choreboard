@@ -3,10 +3,12 @@
         <%= image_tag 'choreslist.png', height: 70 %>
     </div>
     <h4><%= icon('fas', 'chevron-right') %> Today's Quests:</h4>
-    <ul>
+    <ul class="task-list">
         <% @tasks.select(&:mandatory).each do |task| %>
         <li>
-            <h5><%= task.objective.capitalize %></h5>
+            <div class="task-name">
+            <%= task.objective.capitalize %>
+            </div>
             <div class="task-details">
                 <h5>You will need to:</h5>
                 <p>
@@ -43,3 +45,21 @@
         <% end %>
     </ul>
 </div>
+
+<!------------------>
+
+<script>
+  const tasks = document.querySelectorAll(".task-name");
+  console.log(tasks);
+  tasks.forEach( task => {
+    task.addEventListener('click', event => {
+      console.log(event);
+      event.target.nextElementSibling.classList.toggle("visible-task-details");
+      event.target.classList.toggle("active-task");
+    })
+  } )
+  const taskDetails = document.querySelector(".task-details");
+  function showDetails() {
+      taskDetails.style.display = taskDetails.style.display == 'none' ? 'block' : 'none';
+  }
+</script>
