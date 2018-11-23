@@ -9,6 +9,9 @@ Reward.destroy_all
 Task.destroy_all
 Child.destroy_all
 Parent.destroy_all
+
+puts "Creating Nice Seeds......"
+
 parent1 = Parent.create!(email: 'parent@gmail.com', password: '123456', password_confirmation: '123456', name: 'Fisher')
 child1 = Child.create!(email: 'child@gmail.com', password: '123456', password_confirmation: '123456', name: 'Jason', parent: parent1)
 child2 = Child.create!(email: 'child2@gmail.com', password: '123456', password_confirmation: '123456', name: 'Ron', parent: parent1)
@@ -33,7 +36,6 @@ children.each do |child|
       mandatory: [true,false].sample
       )
     task.objective, task.key_results = task_list.to_a.sample
-    p task.objective
     task.save
   end
   3.times do
@@ -48,4 +50,4 @@ children.each do |child|
   end
   child.save
 end
-
+p "Seeds Created"
