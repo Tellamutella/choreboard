@@ -1,0 +1,45 @@
+<div class="container all-tasks">
+    <div class="text-center">
+        <%= image_tag 'choreslist.png', height: 70 %>
+    </div>
+    <h4><%= icon('fas', 'chevron-right') %> Today's Quests:</h4>
+    <ul>
+        <% @tasks.select(&:mandatory).each do |task| %>
+        <li>
+            <h5><%= task.objective.capitalize %></h5>
+            <div class="task-details">
+                <h5>You will need to:</h5>
+                <p>
+                    <%= task.key_results %>
+                </p>
+                <hr>
+                <% if task.task_submissions.any? %>
+                <p>Last submission status:
+                    <%= task.task_submissions.last.state %>
+                </p>
+                <% end %>
+                <%= link_to new_task_task_submission_path(task) do %>
+                Make a submission
+                <% end %>
+            </div>
+        </li>
+        <% end %>
+    </ul>
+    <br>
+    <h4><%= icon('fas', 'chevron-right') %> Ultimate Tasks:</h4>
+    <ul>
+        <% @tasks.reject(&:mandatory).each do |task| %>
+        <li>
+            <h5><%= task.objective.capitalize %></h5>
+            <div class="task-details">
+                <p>
+                    <%= task.key_results %>
+                </p>
+                <%= link_to new_task_task_submission_path(task) do %>
+                Make a submission
+                <% end %>
+            </div>
+        </li>
+        <% end %>
+    </ul>
+</div>
