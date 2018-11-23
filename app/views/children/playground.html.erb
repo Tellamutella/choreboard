@@ -5,11 +5,19 @@
         <h4> [===============--------] <%= icon('fas', 'bomb') %></h4>
         <hr>
     </div>
-
     <div class="all-rewards">
-      <!-- forgot what i was doing... -->
+      <h2>Rewards</h2>
+      <div class="container">
+        <% if current_child.tasks.select(&:mandatory).all? {|task| task.task_submissions.any? ? task.task_submissions.last.state == 1 : false } %>
+          <% current_child.rewards.select(&:daily).each do |reward| %>
+              <%= link_to reward_reward_requests_path(reward), remote: true, method: :post do %><%= reward.name %><% end %>
+              <% if reward.reward_requests.any? %><p>(last request: <%= reward.reward_requests.last.state %>)</p><% end %>
+          <% end %>
+        <% else %>
+          Finish all quests to claim your reward!
+        <% end %>
+      </div>
     </div>
-
     <div class="container all-tasks">
         <div class="text-center">
             <%= image_tag 'choreslist.png', height: 70 %>
@@ -20,14 +28,15 @@
             <li>
                 <h5><%= task.objective.capitalize %></h5>
                 <div class="task-details">
-                  <h5>You will need to:</h5>
+                    <h5>You will need to:</h5>
                     <p>
                         <%= task.key_results %>
                     </p>
                     <hr>
                     <% if task.task_submissions.any? %>
                     <p>Last submission status:
-                    <%= task.task_submissions.last.state %></p>
+                        <%= task.task_submissions.last.state %>
+                    </p>
                     <% end %>
                     <%= link_to new_task_task_submission_path(task) do %>
                     Make a submission
