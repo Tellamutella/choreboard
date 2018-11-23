@@ -1,19 +1,18 @@
 <div class="all-rewards text-center">
   <%= image_tag 'gift.gif', height: 150 %>
     <h3>Rewards</h3>
-    <div class="container">
-        <% if current_child.tasks.select(&:mandatory).all? {|task| task.task_submissions.any? ? task.task_submissions.last.state == 1 : false } %>
-        <% current_child.rewards.select(&:daily).each do |reward| %>
-        <%= link_to reward_reward_requests_path(reward), remote: true, method: :post do %>
-        <%= reward.name %>
-        <% end %>
-        <% if reward.reward_requests.any? %>
-        <p>(last request:
-            <%= reward.reward_requests.last.state %>)</p>
-        <% end %>
-        <% end %>
+    <div>
+        <% if current_child.tasks.select(&:mandatory).any? && current_child.tasks.select(&:mandatory).all? {|task| task.task_submissions.any? ? task.task_submissions.last.state == 1 : false } %>
+            <% current_child.rewards.select(&:daily).each do |reward| %>
+                <%= link_to reward_reward_requests_path(reward), remote: true, method: :post do %>
+                    <%= reward.name %>
+                <% end %>
+                <% if reward.reward_requests.any? %>
+                    <p>(last request: <%= reward.reward_requests.last.state %>)</p>
+                <% end %>
+            <% end %>
         <% else %>
-        Finish all quests to claim your reward!
+        <h5>Finish all quests to claim your reward!</h5>
         <% end %>
     </div>
 </div>
