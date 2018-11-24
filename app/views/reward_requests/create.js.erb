@@ -1,5 +1,5 @@
 function requestReward(requestHTML) {
-  const state = document.getElementById("reward-request-state");
+  const state = document.getElementById("<%= @reward.name %>-request-state");
   // console.log(state);
   // console.log(state.innerHTML);
   state.innerHTML = requestHTML;
