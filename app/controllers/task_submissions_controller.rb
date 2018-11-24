@@ -15,7 +15,6 @@ class TaskSubmissionsController < ApplicationController
     @task_submission.task = @task
     authorize @task_submission
     if @task_submission.save
-      p @task_submission
       redirect_to playground_path
     else
       render :new
@@ -26,6 +25,15 @@ class TaskSubmissionsController < ApplicationController
     @task_submission = TaskSubmission.find(params[:id])
     @task_submission.state = params[:approved] == 'true' ? 1 : -1
     @task_submission.save
+    # if @task_submission.save
+    #    respond_to do |format|
+    #       format.html { redirect_to ... }
+    #       format.js
+    # else
+    #   respond_to do |format|
+    #      format.html { render ... }
+    #      format.js
+    # end
   end
 
   private

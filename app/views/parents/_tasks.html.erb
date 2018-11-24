@@ -1,12 +1,12 @@
-<div class="tasks-info">
-    <div class="container">
+
+
          <h3>Tasks:</h3>
-        <ul>
-            <%  @tasks.each do |t| %>
+         <div>
+            <%  @tasks.take(3).each do |t| %>
             <!-----button---->
-            <p class="test">
-                <%= t.objective %>
-            </p>
+            <div class="test">
+                <%= t.objective %> - <%= t.child.name %>
+            </div>
             <!-- The Modal -->
             <div class="modal">
                 <!-- Modal content -->
@@ -39,6 +39,4 @@
                     <% end %>
                 </div>
             </div>
-        </ul>
-    </div>
-</div>
+        </div>
