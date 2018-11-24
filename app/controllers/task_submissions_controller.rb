@@ -25,15 +25,15 @@ class TaskSubmissionsController < ApplicationController
     @task_submission = TaskSubmission.find(params[:id])
     @task_submission.state = params[:approved] == 'true' ? 1 : -1
     @task_submission.save
-    # if @task_submission.save
-    #    respond_to do |format|
-    #       format.html { redirect_to ... }
-    #       format.js
+    if @task_submission.save
+        respond_to do |format|
+          format.js
+        end
     # else
     #   respond_to do |format|
     #      format.html { render ... }
     #      format.js
-    # end
+    end
   end
 
   private

@@ -1,0 +1,10 @@
+function requestReward(requestHTML) {
+  const state = document.getElementById("reward-request-state");
+  // console.log(state);
+  // console.log(state.innerHTML);
+  state.innerHTML = requestHTML;
+}
+
+<% unless @reward_request.errors.any? %>
+  requestReward("(Submitted, current state: Pending)");
+<% end %>

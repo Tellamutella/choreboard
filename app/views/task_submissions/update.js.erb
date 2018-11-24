@@ -1,0 +1,8 @@
+function updateState(newState) {
+  const submissionState = document.getElementById('submission-state');
+  submissionState.innerHTML = newState;
+}
+
+<% unless @task_submission.errors.any? %>
+  updateState('Submission state: <%= @task_submission.state %>');
+<% end %>

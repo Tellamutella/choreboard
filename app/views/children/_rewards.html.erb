@@ -4,12 +4,19 @@
     <div>
         <% if current_child.tasks.select(&:mandatory).any? && current_child.tasks.select(&:mandatory).all? {|task| task.task_submissions.any? ? task.task_submissions.last.state == 1 : false } %>
             <% current_child.rewards.select(&:daily).each do |reward| %>
+            <% unless reward.claimed %>
                 <%= link_to reward_reward_requests_path(reward), remote: true, method: :post do %>
                     <%= reward.name %>
                 <% end %>
+              <% else %>
+                <%= reward.name %>
+                - Claimed!
+              <% end %>
+
                 <% if reward.reward_requests.any? %>
-                    <p>(last request: <%= reward.reward_requests.last.state %>)</p>
+                   <div id="reward-request-state">(last request: <%= reward.reward_requests.last.state %>)</div>
                 <% end %>
+
             <% end %>
         <% else %>
         <h5>Finish all quests to claim your reward!</h5>

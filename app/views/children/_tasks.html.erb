@@ -7,7 +7,7 @@
         <% @tasks.select(&:mandatory).each do |task| %>
         <li>
             <div class="task-name">
-            <%= task.objective.capitalize %>
+                <%= task.objective.capitalize %>
             </div>
             <div class="task-details">
                 <h5>You will need to:</h5>
@@ -16,9 +16,8 @@
                 </p>
                 <hr>
                 <% if task.task_submissions.any? %>
-                <p>Last submission status:
-                    <%= task.task_submissions.last.state %>
-                </p>
+                <div>(Last submission status:
+                <%= task.task_submissions.last.state %>)</div>
                 <% end %>
                 <%= link_to new_task_task_submission_path(task) do %>
                 Make a submission
@@ -45,16 +44,13 @@
         <% end %>
     </ul>
 </div>
-
 <!------------------>
-
 <script>
-  const tasks = document.querySelectorAll(".task-name");
-  tasks.forEach(task => {
+const tasks = document.querySelectorAll(".task-name");
+tasks.forEach(task => {
     task.addEventListener('click', event => {
-      console.log(event);
-      event.target.nextElementSibling.classList.toggle("visible-task-details");
-      event.target.classList.toggle("active-task");
+        event.target.nextElementSibling.classList.toggle("visible-task-details");
+        event.target.classList.toggle("active-task");
     })
-  })
+})
 </script>

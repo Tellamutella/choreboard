@@ -27,13 +27,13 @@ class RewardsController < ApplicationController
     end
   end
 
-  def update
-    if @reward.update(reward_params)
-      redirect_to reward_path(@cocktail)
-    else
-      render :edit
-    end
-  end
+  # def update
+  #   if @reward.update(reward_params)
+  #     redirect_to dashboard_path
+  #   else
+  #     render :edit
+  #   end
+  # end
 
   # def destroy
   # end
@@ -41,6 +41,6 @@ class RewardsController < ApplicationController
   private
 
   def reward_params
-    params.require(:reward).permit(:name, :details, :price, :child_id)
+    params.require(:reward).permit(:name, :details, :price, :child_id, :daily)
   end
 end

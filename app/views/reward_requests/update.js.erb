@@ -1,0 +1,8 @@
+function updateState(newState) {
+  const requestState = document.getElementById('request-state');
+  requestState.innerHTML = newState;
+}
+
+<% unless @reward_request.errors.any? %>
+  updateState('State: <%= @reward_request.state %>, claimed: <%= @reward_request.reward.claimed %>');
+<% end %>

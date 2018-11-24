@@ -5,8 +5,8 @@ class Child < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   belongs_to :parent
-  has_many :tasks
+  has_many :tasks, dependent: :destroy
   has_many :task_submissions, through: :tasks
-  has_many :rewards
+  has_many :rewards, dependent: :destroy
   has_many :reward_requests, through: :rewards
 end

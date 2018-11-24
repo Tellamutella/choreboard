@@ -13,8 +13,10 @@
             <div class="child-rewards">
                 <h5>Wishlist:</h5>
                 <div class="requests">
-                    <% child.reward_requests.each do |req| %>
-                    <%= req.reward.name %>
+                    <% child.rewards.each do |reward| %>
+                    <div><%= reward.name %></div>
+                    <% if reward.reward_requests.any? %>
+                      <% req = reward.reward_requests.last %>
                     <!------------- AJAX reward request ---------->
                     <div class="mark-submission">
                         <% if req.state == 0 %>
@@ -27,10 +29,13 @@
                     <%= icon('fas', 'times') %> Say No
                     <% end %></span>
                         <% else %>
+                        <div id="request-state">
                         <%= req.state > 0 ? "- Granted" : "- Rejected" %>
+                        </div>
                         <% end %>
                     </div>
                     <!------------------------------------------>
+                    <% end %>
                     <% end %>
                 </div>
             </div>
@@ -53,7 +58,9 @@
                                       <%= icon('fas', 'times') %> Disapprove
                                       <% end %></span>
                         <% else %>
+                        <div id="submission-state">
                         <%= submission.state > 0 ? "- Approved" : "- Disapproved" %>
+                        </div>
                         <% end %>
                     </div>
                     <!------------------------------------------>
