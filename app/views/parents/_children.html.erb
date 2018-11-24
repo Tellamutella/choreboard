@@ -1,22 +1,48 @@
-<div class="children-info">
-    <h3>Children</h3>
-    <div class="btn-add-object">
-        <%= link_to new_child_path do %>
-        Add a child
-        <% end %>
-    </div>
-    <div class="childrens-list">
-        <ul>
-            <% current_parent.children.each do |child| %>
-            <li>
-                <h5><%= child.name %></h5>
-                <div class="container">
-                    <% child.tasks.each do |task| %>
-                    <h5><%= icon('fas', 'chevron-right') %> Task: <%= task.objective %></h5>
-                    <% if task.task_submissions.any? %>
-                    <% task.task_submissions.each do |submission| %>
-                    <div class="container">
-                        <!-- buttons to approve/disapprove -->
+<h3>Children</h3>
+<div class="btn-add-object">
+    <%= link_to new_child_path do %>
+    Add a child
+    <% end %>
+</div>
+<div class="childrens-list">
+    <ul>
+        <% current_parent.children.each do |child| %>
+        <li class="each-child">
+            <h5><%= child.name %></h5>
+            <% if child.reward_requests.any? %>
+            <div class="child-rewards">
+                <h5>Wishlist:</h5>
+                <div class="requests">
+                    <% child.reward_requests.each do |req| %>
+                    <%= req.reward.name %>
+                    <!------------- AJAX reward request ---------->
+                    <div class="mark-submission">
+                        <% if req.state == 0 %>
+                        <span>
+                  <%= link_to reward_reward_request_path(req.reward, req, approved: true), remote: true, method: :patch do %>
+                  <%= icon('fas', 'check') %> Grant Reward
+                  <% end %></span>
+                        <span>
+                    <%= link_to reward_reward_request_path(req.reward, req, approved: false), remote: true, method: :patch do %>
+                    <%= icon('fas', 'times') %> Say No
+                    <% end %></span>
+                        <% else %>
+                        <%= req.state > 0 ? "- Granted" : "- Rejected" %>
+                        <% end %>
+                    </div>
+                    <!------------------------------------------>
+                    <% end %>
+                </div>
+            </div>
+            <% end %>
+            <% child.tasks.each do |task| %>
+            <div class="each-task">
+                <h5><%= icon('fas', 'chevron-right') %> Task: <%= task.objective.capitalize %></h5>
+                <% if task.task_submissions.any? %>
+                <% task.task_submissions.each do |submission| %>
+                <div>
+                    <!------------- AJAX task submission ---------->
+                    <div class="mark-submission">
                         <% if submission.state == 0 %>
                         <span>
                                     <%= link_to task_task_submission_path(task, submission, approved: true), remote: true, method: :patch do %>
@@ -29,21 +55,22 @@
                         <% else %>
                         <%= submission.state > 0 ? "- Approved" : "- Disapproved" %>
                         <% end %>
-                        <!--  -->
-                        <p>
-                            comment:
+                    </div>
+                    <!------------------------------------------>
+                    <div class="submission-details">
+                        Message:<p>
                             <%= submission.comment %>
                         </p>
-                        <% if submission.photo %>
+                        <% unless submission.photo.to_s.empty? %>
                         <%= cl_image_tag submission.photo, height: 300, width: 400, crop: :fill %>
                         <% end %>
                     </div>
-                    <% end %>
-                    <% end %>
-                    <% end %>
                 </div>
-            </li>
-            <% end %>
-        </ul>
-    </div>
+                <% end %>
+                <% end %>
+                <% end %>
+            </div>
+        </li>
+        <% end %>
+    </ul>
 </div>

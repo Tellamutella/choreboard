@@ -9,4 +9,19 @@ class RewardRequestsController < ApplicationController
       raise
     end
   end
+
+  def update
+    @reward_request = RewardRequest.find(params[:id])
+    @reward_request.state = params[:approved] == 'true' ? 1 : -1
+    @reward_request.save
+    # if @reward_request.save
+    #    respond_to do |format|
+    #       format.html { redirect_to ... }
+    #       format.js
+    # else
+    #   respond_to do |format|
+    #      format.html { render ... }
+    #      format.js
+    # end
+  end
 end

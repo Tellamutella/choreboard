@@ -1,9 +1,8 @@
-<div class="rewards-info">
-  <h3>Rewards:</h3>
-  <div class="container">
 
-    <% @rewards.each do |r| %>
-     <div><%= r.name %></div>
+  <h3>Rewards:</h3>
+  <div>
+    <% @rewards.take(3).each do |r| %>
+     <div class="reward"><%= r.name %> - <%= r.child.name %></div>
     <% end %>
 
     <div class="test btn-add-object">Add Rewards</div>
@@ -23,4 +22,3 @@
       </div>
     </div>
   </div>
-</div>

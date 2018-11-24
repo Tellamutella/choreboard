@@ -8,15 +8,20 @@
             <h2>Welcome!</h2>
             <h5><%= current_parent.name %> (<%= current_parent.email %>)</h5>
         </div>
-        <div class="col-xs-6 col-md-4">
-            <%= render 'tasks' %>
+        <div class="tasks-info">
+            <div class="col-xs-6 col-md-4">
+                <%= render 'tasks' %>
+            </div>
         </div>
-        <div class="col-xs-6 col-md-4">
-            <%= render 'rewards' %>
+        <div class="rewards-info">
+            <div class="col-xs-6 col-md-4">
+                <%= render 'rewards' %>
+            </div>
         </div>
-        <div class="col-xs-12">
-            <%= render 'children' %>
-
+        <div class="children-info">
+            <div class="col-xs-12">
+                <%= render 'children' %>
+            </div>
         </div>
     </div>
 </div>
