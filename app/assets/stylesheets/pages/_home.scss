@@ -1,10 +1,9 @@
 // Specific CSS for your home-page
 body {
-  background-color: white;
+  background-color: rgba(255,255,255, 0.9);
 }
 
 .homepage-banner {
-  border: 3px solid yellow;
   background-position: right;
   background-repeat: no-repeat;
   height: 70vh;
@@ -12,29 +11,45 @@ body {
 }
 
 .banner-text {
-  border: 1px solid black;
-  padding: 30px;
-  width: 40%;
+  // border: 1px solid black;
+  border-radius: 10px;
+  background: #FDD166;
+  padding: 20px 40px;
+  width: 35%;
   position: absolute;
   top: 20%;
   left: 10%;
+  color: #333;
+  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
+  h5 {
+    padding: 5px;
+  }
+
+
+  a {
+    color: #888;
+    &:hover {
+    text-decoration: none;
+    color: #666;
+    }
+  }
 }
 
-.img-group, .img-group-odd {
+.img-group-last, .img-group-odd {
   // borders are for testing purpose
-  border-top: 3px solid black;
-  border-bottom: 3px solid black;
+  width: 80%;
   margin: 100px auto;
-}
-
-.img-group {
-  // borders are for testing purpose
-  border-right: 3px solid black;
+  h5 {
+    font-size: 22px;
+  }
 }
 
 .img-group-odd {
   // borders are for testing purpose
-  border-left: 3px solid black;
+  background: white;
+  box-shadow: 0 0 20px -10px #888;
+  border-radius: 50px;
+  padding: 50px;
 }
 
 .img-text-combo {
@@ -46,10 +61,33 @@ body {
 .img-gifs, .text-card {
   width: 100%;
   height: 100%;
-  // borders are for testing purpose
-  border: 3px solid red;
 }
 
 
 .text-card {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.last-gif {
+  border-radius: 10px;
+}
+
+.homepage-footer {
+  height: 300px;
+  font-size: 22px;
+  color: #999;
+  .social-links {
+    padding-top: 50px;
+  }
+
+  .more-info {
+    display: flex;
+    justify-content: center;
+  }
+
+  .social-links i, .more-info h6 {
+    padding: 5px;
+  }
 }
