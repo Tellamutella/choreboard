@@ -50,16 +50,11 @@
 
 <script>
   const tasks = document.querySelectorAll(".task-name");
-  console.log(tasks);
-  tasks.forEach( task => {
+  tasks.forEach(task => {
     task.addEventListener('click', event => {
       console.log(event);
       event.target.nextElementSibling.classList.toggle("visible-task-details");
       event.target.classList.toggle("active-task");
     })
-  } )
-  const taskDetails = document.querySelector(".task-details");
-  function showDetails() {
-      taskDetails.style.display = taskDetails.style.display == 'none' ? 'block' : 'none';
-  }
+  })
 </script>
