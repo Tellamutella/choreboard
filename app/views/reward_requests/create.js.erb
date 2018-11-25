@@ -1,6 +1,6 @@
 function requestReward(requestHTML, unlinkHTML) {
-  const state = document.getElementById("<%= @reward.name.strip %>-request-state");
-  const requestLink = document.getElementById("reward-request-link");
+  const state = document.getElementById("<%= @reward.name.strip.split[0] %>-request-state");
+  const requestLink = document.getElementById("<%= @reward.name.strip.split[0] %>-request-link");
   state.innerHTML = requestHTML;
   requestLink.innerHTML = unlinkHTML;
 }
@@ -8,5 +8,3 @@ function requestReward(requestHTML, unlinkHTML) {
 <% unless @reward_request.errors.any? %>
   requestReward("(Submitted, current state: Pending)", "<%= @reward.name %>");
 <% end %>
-
-
