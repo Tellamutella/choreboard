@@ -14,7 +14,7 @@ class RewardRequestsController < ApplicationController
   end
 
   def update
-    @reward_request = RewardRequest.find(params[:id])
+    @reward_request = authorize RewardRequest.find(params[:id])
     @reward_request.state = params[:approved] == 'true' ? 1 : -1
     @reward_request.reward.claimed = params[:approved] == 'true'
     if @reward_request.save && @reward_request.reward.save

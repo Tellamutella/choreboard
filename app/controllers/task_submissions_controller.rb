@@ -22,7 +22,7 @@ class TaskSubmissionsController < ApplicationController
   end
 
   def update
-    @task_submission = TaskSubmission.find(params[:id])
+    @task_submission = authorize TaskSubmission.find(params[:id])
     @task_submission.state = params[:approved] == 'true' ? 1 : -1
     @task_submission.save
     if @task_submission.save

@@ -15,13 +15,43 @@
                     <%= task.key_results %>
                 </p>
                 <hr>
+
                 <% if task.task_submissions.any? %>
-                <div>(Last submission status:
-                <%= task.task_submissions.last.state %>)</div>
+                      <% if task.task_submissions.last.state.zero? %>
+                      Submission status: Pending...
+
+                      <% elsif task.task_submissions.last.state.positive? %>
+                      Submission status: Approved!
+
+                      <% else %>
+                      Submission status: Disapproved. Please submit again!
+<div class="btn-make-submission">
+    Make a submission
+</div>
+<div style="display: none;">
+<%= simple_form_for [task, task.task_submissions.new] do |f| %>
+<%= f.input :comment %>
+<%= f.input :photo %>
+<%= f.submit %>
+<% end %>
+</div>
+
+
+                      <% end %>
+
+                <% else %>
+<div class="btn-make-submission">
+    Make a submission
+</div>
+<div style="display: none;">
+<%= simple_form_for [task, task.task_submissions.new] do |f| %>
+<%= f.input :comment %>
+<%= f.input :photo %>
+<%= f.submit %>
+<% end %>
+</div>
                 <% end %>
-                <%= link_to new_task_task_submission_path(task) do %>
-                Make a submission
-                <% end %>
+
             </div>
         </li>
         <% end %>
@@ -53,4 +83,13 @@ tasks.forEach(task => {
         event.target.classList.toggle("active-task");
     })
 })
+
+const submissionsBtns = document.querySelectorAll(".btn-make-submission");
+submissionsBtns.forEach(makeSubmission => {
+    makeSubmission.addEventListener('click', event => {
+      const d = makeSubmission.nextElementSibling.style.display;
+      makeSubmission.nextElementSibling.style.display = d == 'none' ? 'block' : 'none';
+  })
+})
+
 </script>

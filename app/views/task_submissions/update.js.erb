@@ -1,8 +1,8 @@
 function updateState(newState) {
-  const submissionState = document.getElementById('submission-state');
+  const submissionState = document.getElementById("<%= @task_submission.task.objective.strip %>submission-actions");
   submissionState.innerHTML = newState;
 }
 
 <% unless @task_submission.errors.any? %>
-  updateState('Submission state: <%= @task_submission.state %>');
+  updateState("<%= @task_submission.state > 0 ? 'Approved!' : 'Disapproved!' %>");
 <% end %>
