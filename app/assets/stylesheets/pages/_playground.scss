@@ -1,5 +1,5 @@
-.task-details {
-  display: block;
+  .task-details {
+  display: none;
   border: 1px solid black;
   border-radius: 3px;
   min-width: 150px;
@@ -33,7 +33,7 @@
 }
 
 .visible-task-details {
-  display: none;
+  display: block;
 }
 
 .btn-make-submission {

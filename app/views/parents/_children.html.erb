@@ -45,7 +45,12 @@
             <% end %>
             <% child.tasks.each do |task| %>
             <div class="each-task">
-                <h5><%= icon('fas', 'chevron-right') %> Task: <%= task.objective.capitalize %></h5>
+              <div class="task-name">
+               Task: <%= task.objective.capitalize %>
+                </div>
+                <div class="task-details">
+                   <p><%= task.key_results %></p>
+                </div>
                 <% if task.task_submissions.any? %>
                 <% task.task_submissions.last(3).each do |submission| %>
                 <div>
@@ -85,3 +90,12 @@
         <% end %>
     </ul>
 </div>
+<script>
+const tasks = document.querySelectorAll(".task-name");
+tasks.forEach(task => {
+    task.addEventListener('click', event => {
+        event.target.nextElementSibling.classList.toggle("visible-task-details");
+        event.target.classList.toggle("active-task");
+    })
+})
+</script>
