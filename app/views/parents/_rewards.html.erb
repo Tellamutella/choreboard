@@ -1,24 +1,25 @@
-
-  <h3>Rewards:</h3>
-  <div>
+<h3>Rewards:</h3>
+<div>
     <% @rewards.take(3).each do |r| %>
-     <div class="reward"><%= r.name %> - <%= r.child.name %></div>
+    <div class="reward">
+        <%= r.name %> -
+        <%= r.child.name %>
+    </div>
     <% end %>
-
     <div class="test btn-add-object">Add Rewards</div>
     <!-- The Modal -->
     <div class="modal">
-      <!-- Modal content -->
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <%= simple_form_for [@reward] do |f| %>
-        <%= f.input :name , label: 'Reward'%>
-        <%= f.input :details %>
-        <%= f.input :price , label: 'Points needed'%>
-        <%= f.input :child_id, collection: @list , label_method: :second, value_method: :first %>
-        <%= f.input :daily %>
-        <%= f.button :button, type: :submit %>
-        <% end %>
-      </div>
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <%= simple_form_for [@reward] do |f| %>
+            <%= f.input :name , label: 'Reward'%>
+            <%= f.input :details %>
+            <%= f.input :price , label: 'Points needed'%>
+            <%= f.input :child_id, collection: @list , label_method: :second, value_method: :first %>
+            <%= f.input :daily %>
+            <%= f.button :button, type: :submit %>
+            <% end %>
+        </div>
     </div>
-  </div>
+</div>

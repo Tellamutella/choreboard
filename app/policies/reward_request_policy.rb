@@ -6,10 +6,14 @@ class RewardRequestPolicy < ApplicationPolicy
   end
 
   def new?
-    true
+    create?
   end
 
   def create?
     true
+  end
+
+  def update?
+    create?
   end
 end

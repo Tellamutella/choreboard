@@ -1,8 +1,8 @@
 function updateState(newState) {
-  const requestState = document.getElementById('request-state');
+  const requestState = document.getElementById("<%= @reward_request.reward.name.strip.split[0] %>-actions");
   requestState.innerHTML = newState;
 }
 
 <% unless @reward_request.errors.any? %>
-  updateState('State: <%= @reward_request.state %>, claimed: <%= @reward_request.reward.claimed %>');
+  updateState('<%= @reward_request.state > 0 ? "Granted!" : "Rejected!" %>');
 <% end %>
