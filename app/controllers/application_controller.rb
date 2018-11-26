@@ -1,12 +1,11 @@
 class ApplicationController < ActionController::Base
-  # protect_from_forgery with: :exception
-  # before_action :authenticate_parent!
-  # before_action :authenticate_child!
+  protect_from_forgery with: :exception, unless: -> { request.format.json? }
+
   include Pundit
   alias pundit_user current_parent
 
   after_action :verify_authorized, except: [:index, :dashboard, :playground], unless: :skip_pundit?
-  after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
+  after_action :verify_policy_scoped, only: [:index], unless: :skip_pundit?
 
   private
 

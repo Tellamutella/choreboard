@@ -1,5 +1,5 @@
 function updateState(newState) {
-  const submissionState = document.getElementById("<%= @task_submission.task.objective.strip.split[0] %>submission-actions");
+  const submissionState = document.getElementById("<%= @task_submission.task.objective.strip.split.join %>submission-actions");
   submissionState.innerHTML = newState;
 }
 
