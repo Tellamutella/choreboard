@@ -1,6 +1,4 @@
 class TaskSubmissionsController < ApplicationController
-  # before_action :authenticate_child!
-
   def new
     @task_submission = TaskSubmission.new(state: 0, child: current_child)
     authorize @task_submission

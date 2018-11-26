@@ -11,7 +11,7 @@
                 --- Pending...
 
               <% elsif !reward.claimed %>
-                <div id="<%= reward.name.strip.split[0] %>-request-link">
+                <div id="<%= reward.name.strip.split.join %>-request-link">
                   <%= link_to reward_reward_requests_path(reward), remote: true, method: :post do %>
                   <%= reward.name %>
                   <% end %>
@@ -22,7 +22,7 @@
                 --- Claimed!
               <% end %>
 
-              <div id="<%= reward.name.strip.split[0] %>-request-state">(last request:
+              <div id="<%= reward.name.strip.split.join %>-request-state">(last request:
                   <%= reward.reward_requests.last.state %>)
               </div>
           <% else %>

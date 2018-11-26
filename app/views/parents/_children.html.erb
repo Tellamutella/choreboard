@@ -21,7 +21,7 @@
                       <% req = reward.reward_requests.last %>
                     <!------------- AJAX reward request ---------->
                               <% if req.state == 0 %>
-<div id="<%= req.reward.name.strip.split[0] %>-actions">
+<div id="<%= req.reward.name.strip.split.join %>-actions">
 <span>
     <%= link_to reward_reward_request_path(req.reward, req, approved: true),
     remote: true, method: :patch do %><%= icon('fas', 'check') %>Grant<% end %>
@@ -52,7 +52,7 @@
                     <!------------- AJAX task submission ---------->
 
                         <% if submission.state == 0 %>
-                        <div id="<%= task.objective.strip.split[0] %>submission-actions">
+                        <div id="<%= task.objective.strip.split.join %>submission-actions">
                         <span>
                                     <%= link_to task_task_submission_path(task, submission, approved: true), remote: true, method: :patch do %>
                                     <%= icon('fas', 'check') %> Approve

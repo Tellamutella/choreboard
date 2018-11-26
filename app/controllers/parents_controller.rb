@@ -1,5 +1,6 @@
 class ParentsController < ApplicationController
-  # skip_before_action :authenticate_child!
+  before_action :authenticate_parent!
+
   def dashboard
     @tasks = policy_scope(Task)
     @rewards = policy_scope(Reward)
