@@ -12,42 +12,53 @@ Parent.destroy_all
 
 puts "Creating Nice Seeds......"
 
-parent1 = Parent.create!(email: 'parent@gmail.com', password: '123456', password_confirmation: '123456', name: 'Fisher')
-child1 = Child.create!(email: 'child@gmail.com', password: '123456', password_confirmation: '123456', name: 'Jason', parent: parent1)
+parent1 = Parent.create!(email: 'parent1@gmail.com', password: '123456', password_confirmation: '123456', name: 'Fisher')
+parent2 = Parent.create!(email: 'parent2@gmail.com', password: '123456', password_confirmation: '123456', name: 'Lee')
+
+child1 = Child.create!(email: 'child1@gmail.com', password: '123456', password_confirmation: '123456', name: 'Lily', parent: parent1)
 child2 = Child.create!(email: 'child2@gmail.com', password: '123456', password_confirmation: '123456', name: 'Ron', parent: parent1)
 child3 = Child.create!(email: 'child3@gmail.com', password: '123456', password_confirmation: '123456', name: 'Ben', parent: parent1)
-task1 = Task.create!(parent: parent1, child: child1, objective: "clean room", key_results: "stuff and stuff")
-reward1 = Reward.create!(parent: parent1, child: child1, price: 10, name: 'test reward', details: 'old mcdonald had a farm')
-parent2 = Parent.create!(email: 'p@gmail.com', password: '123456', password_confirmation: '123456', name: 'Lee')
 
 
+optional_tasks = { "Get A average": "With A+ in math", "Learn a piano piece": "At least a level 6 piece", "Help with cooking": "help at least for 1 hour", 'laundry': "get everything from the laundry basket", "clean public area": "clean the living room/kichten/bathroom"}
+mandatory_tasks = {"Clean your room": "cloths off the floor and put away toys", "Wash dishes": "make sure u can everything in the sink", "Dusting": "dust off everything in the living room", "Sweeping": "sweep everything in the living room", 'Feeding pets': "feed bob and charlie"}
+
+big_rewards = {"PS4": "PS4 WITH 2 GAMES", "XBOX": "XBOX WITH GUN", "SWITCH": "SWITCH WITH MARIO GAME", "Red Dead Redemption 2": "at game stop", "weekend trip": "to a place of your choice" }
+small_rewards = { "1hr TV": "Don't sit too close to the screen", "1hr video game": "Volume not so loud", "Museum visit": "Pick a date of your choice", "cash": "$5"}
 
 
-task_list = {"Clean your room": "cloths off the floor and put away toys", "Wash dishes": "make sure u can everything in the sink", "Dusting": "dust off everything in the living room", "Sweeping": "sweep everything in the living room", 'Feeding pets': "feed bob and charlie", 'laundry': "get everything from the laundry basket"}
-reward_list = {"PS4": "PS4 WITH 2 GAMES", "XBOX": "XBOX WITH GUN", "SWITCH": "SWITCH WITH MARIO GAME", "Red Dead Redemption 2": "at game stop"}
-children = [child1, child2, child3]
-
-
-children.each do |child|
-  3.times do
-    task = Task.new(
+parent1.children.each do |child|
+  10.times do
+    task = child.tasks.new(
       parent: child.parent,
-      child: child,
       mandatory: [true,false].sample
       )
-    task.objective, task.key_results = task_list.to_a.sample
+    if task.mandatory
+      task.objective, task.key_results = mandatory_tasks.to_a.sample
+    else
+      task.objective, task.key_results = optional_tasks.to_a.sample
+    end
     task.save
   end
-  3.times do
-    reward = Reward.new(
+  5.times do
+    reward = child.rewards.new(
       parent: child.parent,
       price: rand(10..100),
-      child: child,
       daily: [true,false].sample
       )
-    reward.name, reward.details = reward_list.to_a.sample
+    if reward.daily
+      reward.name, reward.details = small_rewards.to_a.sample
+    else
+      reward.name, reward.details = big_rewards.to_a.sample
+    end
     reward.save
   end
   child.save
+  p child.name
+  puts "Tasks count:"
+  p child.tasks.count
+  puts "Rewards count:"
+  p child.rewards.count
 end
+
 p "Seeds Created"

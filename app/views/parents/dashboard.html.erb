@@ -5,22 +5,15 @@
 <div class="dashboard-wrapper">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-md-4">
+            <div class="col-xs-12 col-md-3">
                 <h2>Welcome!</h2>
                 <h5><%= current_parent.name %> (<%= current_parent.email %>)</h5>
+                <div><%= render 'tasks' %></div>
+                <div><%= render 'rewards' %></div>
             </div>
-            <div class="tasks-info">
-                <div class="col-xs-6 col-md-4">
-                    <%= render 'tasks' %>
-                </div>
-            </div>
-            <div class="rewards-info">
-                <div class="col-xs-6 col-md-4">
-                    <%= render 'rewards' %>
-                </div>
-            </div>
+
             <div class="children-info">
-                <div class="col-xs-12">
+                <div class="col-xs-12 col-md-9">
                     <%= render 'children' %>
                 </div>
             </div>

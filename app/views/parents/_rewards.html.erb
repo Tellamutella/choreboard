@@ -1,11 +1,5 @@
 <h3>Rewards:</h3>
 <div>
-    <% @rewards.take(3).each do |r| %>
-    <div class="reward">
-        <%= r.name %> -
-        <%= r.child.name %>
-    </div>
-    <% end %>
     <div class="test btn-add-object">Add Rewards</div>
     <!-- The Modal -->
     <div class="modal">
@@ -22,4 +16,17 @@
             <% end %>
         </div>
     </div>
+    <hr>
+    <!----------- Children's rewards list -------------->
+    <h4>Children's Wishlist</h4>
+    <div>
+      <% current_parent.children.each do |child| %>
+        <div><%= icon('fas', 'circle') %> <%= child.name %></div>
+        <% child.rewards.reject(&:daily).each do |r| %>
+          <h6> - <%= r.name %></h6>
+        <% end %>
+      <% end %>
+    </div>
+
+
 </div>
