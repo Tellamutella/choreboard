@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception, unless: -> { request.format.json? }
+  protect_from_forgery with: :exception #, unless: -> { request.format.json? }
 
   include Pundit
   alias pundit_user current_parent

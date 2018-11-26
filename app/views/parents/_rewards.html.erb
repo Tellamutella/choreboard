@@ -21,12 +21,10 @@
     <h4>Children's Wishlist</h4>
     <div>
       <% current_parent.children.each do |child| %>
-        <div><%= icon('fas', 'circle') %> <%= child.name %></div>
+        <div><%= child.name %></div>
         <% child.rewards.reject(&:daily).each do |r| %>
           <h6> - <%= r.name %></h6>
         <% end %>
       <% end %>
     </div>
-
-
 </div>

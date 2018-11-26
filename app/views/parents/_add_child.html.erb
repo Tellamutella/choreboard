@@ -1,0 +1,24 @@
+
+    <div class="test btn-add-object">Add Child</div>
+    <!-- The Modal -->
+    <div class="modal">
+
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <%= simple_form_for @child, url: add_child_path do |f| %>
+            <%= f.input :email,
+                required: true,
+                autofocus: true ,
+                input_html: { autocomplete: "email" }%>
+            <%= f.input :name,
+                required: true,
+                autofocus: true %>
+            <%= f.input :password,
+                required: true,
+                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                input_html: { autocomplete: "new-password" } %>
+            <%= f.submit %>
+            <% end %>
+        </div>
+    </div>
+
