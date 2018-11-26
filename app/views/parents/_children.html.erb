@@ -10,29 +10,38 @@
         <li class="each-child">
             <h5><%= child.name %></h5>
             <% if child.reward_requests.any? %>
-            <div class="child-rewards">
-                <h5>Wishlist:</h5>
-                <div class="requests">
-                    <% child.reward_requests.each do |req| %>
-                    <%= req.reward.name %>
+            <h5>Wishlist:</h5>
+            <div class="child-wishlist">
+
+
+                    <% child.rewards.each do |reward| %>
+                    <div class="each-request">
+                    <div><%= reward.name %></div>
+                    <% if reward.reward_requests.any? %>
+                      <% req = reward.reward_requests.last %>
                     <!------------- AJAX reward request ---------->
                     <div class="mark-submission">
-                        <% if req.state == 0 %>
-                        <span>
-                  <%= link_to reward_reward_request_path(req.reward, req, approved: true), remote: true, method: :patch do %>
-                  <%= icon('fas', 'check') %> Grant Reward
-                  <% end %></span>
-                        <span>
-                    <%= link_to reward_reward_request_path(req.reward, req, approved: false), remote: true, method: :patch do %>
-                    <%= icon('fas', 'times') %> Say No
-                    <% end %></span>
-                        <% else %>
-                        <%= req.state > 0 ? "- Granted" : "- Rejected" %>
-                        <% end %>
+                              <% if req.state == 0 %>
+                                <span>
+                                <%= link_to reward_reward_request_path(req.reward, req, approved: true), remote: true, method: :patch do %>
+                                <%= icon('fas', 'check') %> Grant
+                                <% end %>
+                               </span>
+                              <span>
+                          <%= link_to reward_reward_request_path(req.reward, req, approved: false), remote: true, method: :patch do %>
+                          <%= icon('fas', 'times') %> Say No
+                          <% end %></span>
+                              <% else %>
+                              <div id="request-state">
+                              <%= req.state > 0 ? "(Granted)" : "(Rejected)" %>
+                              </div>
+                              <% end %>
                     </div>
                     <!------------------------------------------>
                     <% end %>
-                </div>
+                    </div>
+                    <% end %>
+
             </div>
             <% end %>
             <% child.tasks.each do |task| %>
@@ -53,7 +62,9 @@
                                       <%= icon('fas', 'times') %> Disapprove
                                       <% end %></span>
                         <% else %>
+                        <div id="submission-state">
                         <%= submission.state > 0 ? "- Approved" : "- Disapproved" %>
+                        </div>
                         <% end %>
                     </div>
                     <!------------------------------------------>
