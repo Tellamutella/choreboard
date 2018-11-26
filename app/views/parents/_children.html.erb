@@ -3,7 +3,7 @@
     <%= render 'add_child', child: @child %>
 
 <div class="childrens-list">
-    <ul>
+    <ul style="list-style: none;">
         <% current_parent.children.each do |child| %>
         <li class="each-child">
             <h5><%= child.name %></h5>
