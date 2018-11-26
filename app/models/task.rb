@@ -4,4 +4,6 @@ class Task < ApplicationRecord
 
   has_many :task_submissions, dependent: :destroy
   mount_uploader :photo, PhotoUploader
+
+  validates :objective, presence: true, uniqueness: { scope: :child }
 end
