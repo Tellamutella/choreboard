@@ -1,5 +1,5 @@
 function updateState(newState) {
-  const requestState = document.getElementById("<%= @reward_request.reward.name.strip.split.join %>-actions");
+  const requestState = document.getElementById("<%= @reward_request.child.name.strip %>-<%= @reward_request.reward.name.strip.split.join %>-actions");
   requestState.innerHTML = newState;
 }
 
