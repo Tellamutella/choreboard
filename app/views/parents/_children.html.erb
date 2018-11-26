@@ -1,9 +1,7 @@
 <h3>Children</h3>
-<div class="btn-add-object">
-    <%= link_to new_child_path do %>
-    Add a child
-    <% end %>
-</div>
+
+    <%= render 'add_child', child: @child %>
+
 <div class="childrens-list">
     <ul>
         <% current_parent.children.each do |child| %>
@@ -12,8 +10,6 @@
             <% if child.reward_requests.any? %>
             <h5>Wishlist:</h5>
             <div class="child-wishlist">
-
-
                     <% child.rewards.each do |reward| %>
                     <div class="each-request">
                     <div><%= reward.name %></div>

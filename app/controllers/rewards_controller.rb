@@ -19,8 +19,6 @@ class RewardsController < ApplicationController
     authorize @reward
     if @reward.save
       redirect_to dashboard_path
-    else
-      render :new
     end
   end
 
