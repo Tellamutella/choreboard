@@ -9,4 +9,6 @@ class Child < ApplicationRecord
   has_many :task_submissions, through: :tasks
   has_many :rewards, dependent: :destroy
   has_many :reward_requests, through: :rewards
+
+  validates :name, presence: true, uniqueness: true
 end
