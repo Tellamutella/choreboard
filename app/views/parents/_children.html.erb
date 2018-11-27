@@ -61,8 +61,12 @@
                                       <% end %></span>
                         </div>
                         <% else %>
-                        <div id="submission-state" style="text-align: center;">
-                        <%= submission.state > 0 ? " (Approved)" : " (Disapproved)" %>
+                        <div id="submission-state" style="margin-right: 80px;">
+                          <% if submission.state > 0  %>
+                            <%= cl_image_tag 'checked_2' %> Approved!
+                            <% else %>
+                            <%= cl_image_tag 'error_2' %> Rejected!
+                            <% end %>
                         </div>
                         <% end %>
                     <!------------------------------------------>
@@ -71,7 +75,7 @@
                             <%= submission.comment %>
                         </p>
                         <% unless submission.photo.to_s.empty? %>
-                        <%= cl_image_tag submission.photo, height: 300, width: 400, crop: :fill %>
+                        <%= cl_image_tag submission.photo, height: 200, width: 300, crop: :fill %>
                         <% end %>
                     </div>
                 </div>

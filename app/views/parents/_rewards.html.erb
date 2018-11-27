@@ -1,4 +1,4 @@
-<h3>Rewards:</h3>
+<h3>Rewards: <%=cl_image_tag 'gift_1'%></h3>
 <div>
     <div class="test btn-add-object">Add Rewards</div>
     <!-- The Modal -->
@@ -18,7 +18,7 @@
     </div>
     <hr>
     <!----------- Children's rewards list -------------->
-    <h4>Children's Wishlist</h4>
+    <h4>Children's Wishlist  <%=cl_image_tag 'wishlist'%></h4>
     <div>
       <% current_parent.children.each do |child| %>
         <div style="font-weight: bold; font-size: 25px;"><%= child.name %></div>
