@@ -18,12 +18,41 @@
 }
 
 .submission-details {
-
-    border: 1px solid black;
+  box-shadow: 2px 2px 2px #888888;
 
 }
 
 .child-wishlist {
     background: yellow;
     display: flex;
+}
+
+.each-task {
+  border-radius: 5px;
+}
+
+.dashboard-task-name {
+  padding: 10px;
+  width: 250px;
+  transition: ease-in-out 250ms;
+  border:1px solid white;
+  border-radius: 10px;
+  background-color:rgb(253, 208, 102);
+  color:white;
+  font-weight:bold;
+  &:hover {
+    cursor: pointer;
+    opacity: 0.7;
+  }
+}
+
+.children-banner {
+  background-color: rgb(242, 187, 67);
+  border-radius: 15px;
+  height:50px;
+  color:white;
+  h3 {
+    padding:10px;
+    font-weight:bold;
+  }
 }
