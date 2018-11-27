@@ -1,51 +1,67 @@
-<canvas id="playground-canvas" style="background-image: url('<%= image_path 'pg' %>');">
+<!-- <canvas id="playground-canvas" style="background-image: url('<%#= image_path 'pg' %>');">
 
-  <%= image_tag 'quest', id: 'btn-quests'; %>
-  <%= image_tag 'current', id: 'current-pos'; %>
-  <%= image_tag 'pika', id: 'pika'; %>
-  <%= image_tag 'egg', id: 'egg'; %>
+  <%#= image_tag 'quest', id: 'btn-quests'; %>
+  <%#= image_tag 'current', id: 'current-position'; %>
+  <%#= image_tag 'pika', id: 'pika'; %>
+  <%#= image_tag 'egg', id: 'egg'; %>
 
-
-</canvas>
-
-
-<!-- ####################################################### -->
-<!-- <div class="container">
+<div class="container">
     <div class="container text-center">
         <h2><%#= current_child.name %></h2>
         <h5><%#= current_child.point %> points</h5>
-        <h4> [===============--------] <%#= icon('fas', 'bomb') %></h4>
-
     </div>
     <%#= render 'rewards' %>
     <hr>
     <%#= render 'tasks' %>
 </div>
- -->
- <!-- ####################################################### -->
-<script>
+
+</canvas> -->
+<!-- ####################################################### -->
+<div id="playground-map" style="background-image: url('<%= image_path 'pg' %>');">
+    <div>
+        <div class="col-md-3 todays-quests">
+          <div class="text-center">
+            <h2><%= current_child.name %></h2>
+            <h5><%= current_child.point %> points <%= icon('fas', 'bomb') %></h5>
+            <%= render 'rewards' %>
+            <hr>
+            </div>
+
+            <%= render 'tasks' %>
+        </div>
+        <div class="col-md-offset-3">
+            <div class="pos1"></div>
+            <div id="pikachu"> <%= image_tag 'pika' %> </div>
+        </div>
+    </div>
+</div>
+<!-- ####################################################### -->
+<!-- <script>
 const canvas = document.getElementById('playground-canvas');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 const ctx = canvas.getContext("2d");
-// ctx.fillStyle = "rgba(251, 232, 230, 0.5)";
-// ctx.fillRect(0,0,1500,750);
+ctx.fillStyle = "rgba(251, 232, 230, 0.8)";
+ctx.fillRect(window.innerWidth - 1000,0,window.innerWidth,window.innerHeight);
 // ctx.beginPath();
 // ctx.arc(495,550,10,0,2*Math.PI);
 // ctx.stroke();
 
 // quest icon at top left corder
-const img = document.getElementById("btn-quests");
-console.log(img);
-ctx.drawImage(img, 50, 50);
+const quests = document.getElementById("btn-quests");
+console.log(quests);
+ctx.drawImage(quests, 30, 30);
 /////
 
 
-const current = document.getElementById("current");
+const current = document.getElementById("current-position");
 const pika = document.getElementById("pika");
 const egg = document.getElementById("egg");
-ctx.drawImage(egg, 450, 500);
-// ctx.drawImage(img, 50, 50);
-// ctx.drawImage(img, 50, 50);
+//ctx.drawImage(egg, 497, 525);
+ctx.drawImage(pika, 670, 590);
+ctx.drawImage(current, 370, 440);
 
-</script>
+// child info
+ctx.font = "26px Arial";
+ctx.fillText(<%#= current_child.name %>, 1050, 30)
+</script> -->
