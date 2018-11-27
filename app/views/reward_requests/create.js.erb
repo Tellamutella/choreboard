@@ -1,10 +1,10 @@
 function requestReward(requestHTML, unlinkHTML) {
-  const state = document.getElementById("<%= @reward.name.strip.split.join %>-request-state");
-  const requestLink = document.getElementById("<%= @reward.name.strip.split.join %>-request-link");
+  const state = document.getElementById("<%= @reward.child.name.strip %>-<%= @reward.name.strip.split.join %>-request-state");
+  const requestLink = document.getElementById("<%= @reward.child.name.strip %>-<%= @reward.name.strip.split.join %>-request-link");
   state.innerHTML = requestHTML;
   requestLink.innerHTML = unlinkHTML;
 }
 
 <% unless @reward_request.errors.any? %>
-  requestReward("(Submitted, current state: Pending)", "<%= @reward.name %>");
+  requestReward("(Submitted, current state: Pending.)", "<%= @reward.name %>");
 <% end %>
