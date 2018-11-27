@@ -22,7 +22,7 @@
         <div class="todays-quests">
           <div class="text-center">
             <h2><%= current_child.name %></h2>
-            <h5><%= current_child.point %> points <span id="btn-catch-pika"><%= icon('fas', 'bomb') %></span></h5>
+            <h5 id="points-left"><%= current_child.point %> points <span id="btn-catch-pika"><%= icon('fas', 'bomb') %></span></h5>
             <%= render 'rewards' %>
             <hr>
             </div>
@@ -46,17 +46,27 @@
 </div>
 <!-- ####################################################### -->
 <script>
-  const btnCatch = document.getElementById('btn-catch-pika');
-  btnCatch.addEventListener('click', event => {
-    const current = document.querySelector('.pos-current');
-    const next = current.nextElementSibling != null ? current.nextElementSibling : document.getElementById('pos-1');
+const btnCatch = document.getElementById('btn-catch-pika');
+btnCatch.addEventListener('click', event => moveToNext());
 
-    current.classList.remove('pos-current');
-    current.innerHTML = "";
 
+function moveToNext() {
+  const current = document.querySelector('.pos-current');
+
+  let next;
+  if (current.nextElementSibling == null) {
+    next = document.getElementById('pikachu');
+    next.classList.add('pokeball-catched');
+    next.innerHTML = `<%= image_tag 'pokeball' %>`;
+  } else {
+    next = current.nextElementSibling;
     next.classList.add('pos-current');
     next.innerHTML = `<%= cl_image_tag 'current' %>`;
-  })
+  }
+
+  current.classList.remove('pos-current');
+  current.innerHTML = "";
+}
 
 </script>
 

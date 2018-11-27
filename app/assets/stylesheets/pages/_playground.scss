@@ -103,9 +103,21 @@
   right: 29%;
 }
 
-// #catch-pika {
+.pokeball-catched {
+  animation: 1.7s roll-ball;
+}
 
-// }
+@keyframes roll-ball {
+  0% {
+    transform: rotate(20deg);
+  }
+  40% {
+transform: rotate(-360deg);
+  }
+  100% {
+transform: rotate(360deg);
+  }
+}
 
 // ########### COORDINATES FOR 10 FLOATING ISLANDS ###############
 #pos-1 {
