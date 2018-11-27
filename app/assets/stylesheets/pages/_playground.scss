@@ -1,4 +1,14 @@
-  .task-details {
+#playground-canvas {
+  // background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#btn-quests {
+  border: 5px solid yellow;
+  z-index: 10;
+}
+
+.task-details {
   display: none;
   border: 1px solid black;
   border-radius: 3px;
