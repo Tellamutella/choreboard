@@ -7,7 +7,6 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  width: 100%;
   height: calc(100vh - 60px);
   position: relative;
 }
@@ -97,9 +96,74 @@
     }
 }
 
-// ###############################
+// ###########
 #pikachu {
   position: absolute;
-  bottom: 24%;
-  right: 28%;
+  bottom: 21%;
+  right: 29%;
+}
+
+// #catch-pika {
+
+// }
+
+// ########### COORDINATES FOR 10 FLOATING ISLANDS ###############
+#pos-1 {
+  position: absolute;
+  top: 44%;
+  left: 40%;
+}
+
+#pos-2 {
+  position: absolute;
+  top: 47%;
+  left: 44%;
+}
+
+#pos-3 {
+  position: absolute;
+  top: 53%;
+  left: 47%;
+}
+
+#pos-4 {
+  position: absolute;
+  top: 55.5%;
+  left: 50%;
+}
+
+#pos-5 {
+  position: absolute;
+  top: 58%;
+  left: 52%;
+}
+
+#pos-6 {
+  position: absolute;
+  top: 64%;
+  left: 51%;
+}
+
+#pos-7 {
+  position: absolute;
+  top: 69%;
+  left: 49%;
+}
+
+#pos-8 {
+  position: absolute;
+  top: 75.5%;
+  left: 52%;
+}
+
+#pos-9 {
+  position: absolute;
+  top: 81%;
+  left: 53.5%;
+}
+
+#pos-10 {
+  position: absolute;
+  top: 84%;
+  left: 57%;
 }
