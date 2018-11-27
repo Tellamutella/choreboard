@@ -28,23 +28,36 @@
     display: flex;
 }
 
+.task-group {
+  display:flex;
+
+}
+
+
 .each-task {
   border-radius: 5px;
+  display:flex;
+  flex-direction:column;
 }
 
 .dashboard-task-name {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   padding: 10px;
   width: 250px;
   transition: ease-in-out 250ms;
-
   background-color:rgb(253, 208, 102);
   color:white;
   font-weight:bold;
-   box-shadow: 1px 1px 1px #888888;
+  box-shadow: 1px 1px 1px #888888;
   margin:10px;
   &:hover {
     cursor: pointer;
     opacity: 0.8;
+  }
+  p {
+    margin-bottom: 0
   }
 }
 
@@ -62,9 +75,13 @@
 
 .add-feature {
   display:flex;
-  align-items:baseline;
+  align-items:center;
+  margin: 25px 0px;
+  h3 {
+    margin: 0
+  }
 }
 
 .dashboard-icon {
-  margin-right: 10px;
+  margin: 0 10px;
 }

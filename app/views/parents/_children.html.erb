@@ -34,60 +34,70 @@
                     <% end %>
             </div>
             <% end %>
-            <% child.tasks.each do |task| %>
-            <div class="each-task" style="text-align: center;">
-              <div class="dashboard-task-name">
-               <%= task.objective.capitalize %>
-               <% task.task_submissions.each do |check| %>
-               <% if check.state == 1 %>
-              <%= cl_image_tag 'checked_2' %>
-               <%end %>
-               <%end %>
-                </div>
-                <div class="task-details">
-                   <p><strong>Details:</strong><%= task.key_results %></p>
-                <% if task.task_submissions.any? %>
-                <% task.task_submissions.last(3).each do |submission| %>
-                <div>
-                    <!------------- AJAX task submission ---------->
 
-                        <% if submission.state == 0 %>
-                        <div id="<%= task.objective.strip.split.join %>submission-actions">
-                        <span>
-                                    <%= link_to task_task_submission_path(task, submission, approved: true), remote: true, method: :patch do %>
-                                    <%= icon('fas', 'check') %> Approve
-                                    <% end %></span>
-                        <span>
-                                      <%= link_to task_task_submission_path(task, submission, approved: false), remote: true, method: :patch do %>
-                                      <%= icon('fas', 'times') %> Disapprove
-                                      <% end %></span>
-                        </div>
-                        <% else %>
-                      <!--   <div id="submission-state"> -->
-                          <%# if submission.state > 0  %>
-                            <%#= cl_image_tag 'checked_2' Approved%>
-                            <%# else %>
-                            <%#= cl_image_tag 'error_2' Rejected!%>
-                            <%# end %>
-                       <!--  </div> -->
+            <div class="task-group">
+              <% child.tasks.each do |task| %>
+                <div class="each-task">
+                  <div class="dashboard-task-name">
+                   <p><%= task.objective.capitalize %></p>
+                   <% task.task_submissions.each do |check| %>
+                      <% if check.state == 1 %>
+                          <%= cl_image_tag 'checked_2' %>
+                      <%end %>
+                   <%end %>
+                  </div>
+                  <div class="task-details">
+                      <p><strong>Details:</strong><%= task.key_results %></p>
+                      <% if task.task_submissions.any? %>
+                        <% task.task_submissions.last(3).each do |submission| %>
+                          <div>
+                            <!------------- AJAX task submission ---------->
+
+                                <% if submission.state == 0 %>
+                                  <div id="<%= task.objective.strip.split.join %>submission-actions">
+                                    <span>
+                                                <%= link_to task_task_submission_path(task, submission, approved: true), remote: true, method: :patch do %>
+                                                <%= icon('fas', 'check') %> Approve
+                                                <% end %>
+
+                                    </span>
+                                    <span>
+                                                  <%= link_to task_task_submission_path(task, submission, approved: false), remote: true, method: :patch do %>
+                                                  <%= icon('fas', 'times') %> Disapprove
+                                                  <% end %>
+
+                                    </span>
+                                  </div>
+                                <% else %>
+                              <!--   <div id="submission-state"> -->
+                                  <%# if submission.state > 0  %>
+                                    <%#= cl_image_tag 'checked_2' Approved%>
+                                    <%# else %>
+                                    <%#= cl_image_tag 'error_2' Rejected!%>
+                                    <%# end %>
+                               <!--  </div> -->
+                                <% end %>
+                            <!------------------------------------------>
+                                <div class="submission-details">
+                                    <strong>Message:</strong><p>
+                                        <%= submission.comment %>
+                                    </p>
+                                    <% unless submission.photo.to_s.empty? %>
+                                    <%= cl_image_tag submission.photo, height: 200, width: 300, crop: :fill %>
+                                    <% end %>
+                                </div>
+                          </div>
                         <% end %>
-                    <!------------------------------------------>
-                    <div class="submission-details">
-                        <strong>Message:</strong><p>
-                            <%= submission.comment %>
-                        </p>
-                        <% unless submission.photo.to_s.empty? %>
-                        <%= cl_image_tag submission.photo, height: 200, width: 300, crop: :fill %>
-                        <% end %>
-                    </div>
+                      <% end %>
+                  </div>
+
                 </div>
-                <% end %>
-                <% end %>
-                </div>
-                <% end %>
+              <% end %>
             </div>
+
         </li>
         <% end %>
+
     </ul>
 </div>
 <script>
