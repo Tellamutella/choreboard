@@ -1,6 +1,9 @@
-<h3>Rewards: <%=cl_image_tag 'gift_1'%></h3>
+<div class='add-feature'>
+    <%=cl_image_tag 'gift_1', height: 34, width: 34, class: "dashboard-icon"%>
+    <h3> Rewards:</h3>
+    <%=cl_image_tag 'plus', height: 34, width: 34,class: "test btn-add-object" %>
+</div>
 <div>
-    <div class="test btn-add-object">Add Rewards</div>
     <!-- The Modal -->
     <div class="modal">
         <!-- Modal content -->
@@ -18,13 +21,15 @@
     </div>
     <hr>
     <!----------- Children's rewards list -------------->
-    <h4>Children's Wishlist  <%=cl_image_tag 'wishlist'%></h4>
+    <h4>Goals!  <%=cl_image_tag 'wishlist'%></h4>
     <div>
-      <% current_parent.children.each do |child| %>
-        <div style="font-weight: bold; font-size: 25px;"><%= child.name %></div>
+        <% current_parent.children.each do |child| %>
+        <div style="font-weight: bold; font-size: 20px;">
+            <%= child.name %>
+        </div>
         <% child.rewards.reject(&:daily).each do |r| %>
-          <h5> - <%= r.name %></h5>
+        <h5> - <%= r.name %></h5>
         <% end %>
-      <% end %>
+        <% end %>
     </div>
 </div>

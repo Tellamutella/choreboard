@@ -1,6 +1,4 @@
-
-<div class="children-banner"> <h3>The <%= current_parent.name %> Family</h3></div>
-<div class="childrens-list">
+  <div class="childrens-list">
     <ul style="list-style: none;">
         <% current_parent.children.each do |child| %>
         <li class="each-child">
@@ -14,22 +12,22 @@
                     <% if reward.reward_requests.any? %>
                       <% req = reward.reward_requests.last %>
                     <!------------- AJAX reward request ---------->
-                              <% if req.state == 0 %>
-<div id="<%= req.reward.name.strip.split.join %>-actions">
-<span>
-    <%= link_to reward_reward_request_path(req.reward, req, approved: true),
-    remote: true, method: :patch do %><%= icon('fas', 'check') %>Grant<% end %>
-  </span>
-  <span>
-    <%= link_to reward_reward_request_path(req.reward, req, approved: false),
-    remote: true, method: :patch do %><%= icon('fas', 'times') %> Say No<% end %>
-  </span>
-</div>
-                              <% else %>
-                              <div id="request-state">
-                              <%= req.state > 0 ? "(Granted)" : "(Rejected)" %>
-                              </div>
-                              <% end %>
+                      <% if req.state == 0 %>
+                        <div id="<%= req.reward.name.strip.split.join %>-actions">
+                        <span>
+                            <%= link_to reward_reward_request_path(req.reward, req, approved: true),
+                            remote: true, method: :patch do %><%= icon('fas', 'check') %>Grant<% end %>
+                          </span>
+                          <span>
+                            <%= link_to reward_reward_request_path(req.reward, req, approved: false),
+                            remote: true, method: :patch do %><%= icon('fas', 'times') %> Say No<% end %>
+                          </span>
+                        </div>
+                      <% else %>
+                        <div id="request-state">
+                        <%= req.state > 0 ? "(Granted)" : "(Rejected)" %>
+                        </div>
+                      <% end %>
                     <!------------------------------------------>
                     <% end %>
                     </div>
@@ -40,10 +38,14 @@
             <div class="each-task" style="text-align: center;">
               <div class="dashboard-task-name">
                <%= task.objective.capitalize %>
+               <% task.task_submissions.each do |check| %>
+               <% if check.state == 1 %>
+              <%= cl_image_tag 'checked_2' %>
+               <%end %>
+               <%end %>
                 </div>
                 <div class="task-details">
-                   <p><%= task.key_results %></p>
-                </div>
+                   <p><strong>Details:</strong><%= task.key_results %></p>
                 <% if task.task_submissions.any? %>
                 <% task.task_submissions.last(3).each do |submission| %>
                 <div>
@@ -61,17 +63,17 @@
                                       <% end %></span>
                         </div>
                         <% else %>
-                        <div id="submission-state" style="margin-right: 80px;">
-                          <% if submission.state > 0  %>
-                            <%= cl_image_tag 'checked_2' %> Approved!
-                            <% else %>
-                            <%= cl_image_tag 'error_2' %> Rejected!
-                            <% end %>
-                        </div>
+                      <!--   <div id="submission-state"> -->
+                          <%# if submission.state > 0  %>
+                            <%#= cl_image_tag 'checked_2' Approved%>
+                            <%# else %>
+                            <%#= cl_image_tag 'error_2' Rejected!%>
+                            <%# end %>
+                       <!--  </div> -->
                         <% end %>
                     <!------------------------------------------>
                     <div class="submission-details">
-                        Message:<p>
+                        <strong>Message:</strong><p>
                             <%= submission.comment %>
                         </p>
                         <% unless submission.photo.to_s.empty? %>
@@ -81,6 +83,7 @@
                 </div>
                 <% end %>
                 <% end %>
+                </div>
                 <% end %>
             </div>
         </li>

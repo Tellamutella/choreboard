@@ -14,18 +14,17 @@
 .child-wishlist,
 .submission-details {
     margin: 10px;
-    padding: 10px 20px;
+
 }
 
 .submission-details {
-  box-shadow: 1px 1px 10px #888888;
-  width: 600px;
-  height: 400px;
+  width: 500px;
+  height: 300px;
+  text-align:right;
 
 }
 
 .child-wishlist {
-    background: yellow;
     display: flex;
 }
 
@@ -37,11 +36,11 @@
   padding: 10px;
   width: 250px;
   transition: ease-in-out 250ms;
-  border-radius: 10px;
+
   background-color:rgb(253, 208, 102);
   color:white;
   font-weight:bold;
-   box-shadow: 3px 3px 3px #888888;
+   box-shadow: 1px 1px 1px #888888;
   margin:10px;
   &:hover {
     cursor: pointer;
@@ -59,4 +58,13 @@
     padding:10px;
     font-weight:bold;
   }
+}
+
+.add-feature {
+  display:flex;
+  align-items:baseline;
+}
+
+.dashboard-icon {
+  margin-right: 10px;
 }
