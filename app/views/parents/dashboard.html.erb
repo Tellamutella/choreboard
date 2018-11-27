@@ -2,18 +2,18 @@
 <!-- add child button, children list with status -->
 <!-- create task button, mandatory tasks list -->
 <!-- create reward button, daily rewards list  -->
-<div class="dashboard-wrapper">
+<div class="dashboard-wrapper" style='background-color: rgb(243, 247, 246)'>
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-md-3">
+            <div class="col-xs-12 col-md-3" >
                 <h2>Welcome!</h2>
-                <h5>The <%= current_parent.name %> Family</h5>
                 <p>(<%= current_parent.email %>)</p>
+                <div><%= render 'add_child', child: @child %></div>
                 <div><%= render 'tasks' %></div>
                 <div><%= render 'rewards' %></div>
             </div>
             <div class="children-info">
-                <div class="col-xs-12 col-md-9">
+                <div class="col-xs-12 col-md-9" >
                     <%= render 'children' %>
                 </div>
             </div>

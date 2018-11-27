@@ -21,9 +21,9 @@
     <h4>Children's Wishlist</h4>
     <div>
       <% current_parent.children.each do |child| %>
-        <div><%= child.name %></div>
+        <div style="font-weight: bold; font-size: 25px;"><%= child.name %></div>
         <% child.rewards.reject(&:daily).each do |r| %>
-          <h6> - <%= r.name %></h6>
+          <h5> - <%= r.name %></h5>
         <% end %>
       <% end %>
     </div>
