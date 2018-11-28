@@ -1,5 +1,4 @@
 class Child < ApplicationRecord
-  attr_reader :completed_tasks, :done_all_mandatory
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
@@ -13,12 +12,19 @@ class Child < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
 
+  def mandatory_tasks
+    tasks.select(&:mandatory)
+  end
+
   def completed_tasks
     tasks.count { |t| t.task_submissions.any? && t.task_submissions.last.state == 1 }
   end
 
   def done_all_mandatory?
-    list = tasks.select(&:mandatory)
-    list.any? && list.all? { |t| t.task_submissions.any? ? t.task_submissions.last.state == 1 : false }
+    mandatory_tasks.any? && mandatory_tasks.all? { |t| t.task_submissions.any? ? t.task_submissions.last.state == 1 : false }
+  end
+
+  def progress
+    completed_tasks.fdiv(mandatory_tasks.count).round(1)
   end
 end
