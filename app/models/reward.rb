@@ -22,7 +22,7 @@ class Reward < ApplicationRecord
     when 'Event'
       'balloons'
     else
-      'Otherrrrrr'
+      'chest'
     end
   end
 end

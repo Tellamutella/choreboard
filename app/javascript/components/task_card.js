@@ -27,6 +27,11 @@ window.findTaskDetails = function ()  {
   let eachTask = document.querySelectorAll(".dashboard-task-name")
   eachTask.forEach(task => {
     task.addEventListener('click', event => {
+      const allActive = document.querySelectorAll(".active-task")
+      allActive.forEach((activeTask) => {
+        activeTask.classList.remove("active-task")
+      });
+      event.target.classList.add('active-task');
       const allDetails = document.querySelectorAll(".task-details")
       allDetails.forEach((detailBox) => {
         detailBox.classList.remove("show-task");
