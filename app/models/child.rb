@@ -16,6 +16,10 @@ class Child < ApplicationRecord
     tasks.select(&:mandatory)
   end
 
+  def daily_rewards
+    rewards.select(&:daily)
+  end
+
   def completed_tasks
     tasks.count { |t| t.task_submissions.any? && t.task_submissions.last.state == 1 }
   end

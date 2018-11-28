@@ -13,6 +13,7 @@ class ChildrenController < ApplicationController
 
   def create
     @child = authorize current_parent.children.new(child_params)
+    @child.email = "#{@child.name.strip}-#{@child.parent.name.strip}@beans.com"
     if @child.save
       redirect_to dashboard_path
     else
@@ -24,6 +25,6 @@ class ChildrenController < ApplicationController
   private
 
   def child_params
-    params.require(:child).permit(:email, :password)
+    params.require(:child).permit(:email, :password, :name)
   end
 end

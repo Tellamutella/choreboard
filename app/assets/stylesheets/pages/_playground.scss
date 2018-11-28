@@ -30,8 +30,9 @@
 }
 
 .playground-task-details {
+  display: none;
   color: rgba(white, 0.9);
-  border: 1px solid black;
+  // border: 1px solid black;
   background: rgba(0,0,0,0.6);
   border-radius: 3px;
   min-width: 280px;
@@ -62,10 +63,6 @@
   span.claimed {
     color: #7B874E;
   }
-
-  span.rejected {
-    color: red;
-  }
 }
 
 .requests-status-list {
@@ -87,8 +84,21 @@
   }
 }
 
-.active-task {
+.playground-active-task {
   font-weight: bold;
+  animation: 0.3s jump-a-lil;
+}
+
+@keyframes jump-a-lil {
+  0% {
+    transform: scaleY(1);
+  }
+  30% {
+    transform: scaleY(1.2);
+  }
+  100% {
+    transform: scaleY(1);
+  }
 }
 
 .visible-task-details {
@@ -131,10 +141,10 @@
     transform: rotate(20deg);
   }
   40% {
-transform: rotate(-360deg);
+    transform: rotate(-360deg);
   }
   100% {
-transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
