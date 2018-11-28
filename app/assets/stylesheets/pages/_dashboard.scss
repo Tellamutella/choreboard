@@ -45,7 +45,7 @@
   justify-content: space-around;
   align-items: center;
   padding: 10px;
-  width: 250px;
+  min-width: 100px;
   transition: ease-in-out 250ms;
   background-color:rgb(253, 208, 102);
   color:white;
@@ -84,4 +84,8 @@
 
 .dashboard-icon {
   margin: 0 10px;
+}
+
+.show-task {
+  display:block;
 }
