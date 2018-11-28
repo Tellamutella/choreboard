@@ -3,7 +3,7 @@
     <h4><%= cl_image_tag 'yay', height: 50 %> <!-- <strong>Rewards</strong> --></h4>
     </div>
     <div class="requests-status-list">
-        <% if current_child.tasks.select(&:mandatory).any? && current_child.tasks.select(&:mandatory).all? {|task| task.task_submissions.any? ? task.task_submissions.last.state == 1 : false } %>
+        <% if current_child.done_all_mandatory? %>
         <% current_child.rewards.select(&:daily).each do |reward| %>
         <div class="each-reward">
           <% if reward.reward_requests.any? %>
