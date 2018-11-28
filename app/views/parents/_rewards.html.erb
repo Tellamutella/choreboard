@@ -11,6 +11,7 @@
             <span class="close">&times;</span>
             <%= simple_form_for [@reward] do |f| %>
             <%= f.input :name , label: 'Reward'%>
+            <%= f.input :category, collection: %w[Gaming Entertainment Outdoor Allowance Tablet Event Other] %>
             <%= f.input :details %>
             <%= f.input :price , label: 'Points needed'%>
             <%= f.input :child_id, collection: @list , label_method: :second, value_method: :first %>

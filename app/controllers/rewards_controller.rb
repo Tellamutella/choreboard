@@ -36,6 +36,6 @@ class RewardsController < ApplicationController
   private
 
   def reward_params
-    params.require(:reward).permit(:name, :details, :price, :child_id, :daily)
+    params.require(:reward).permit(:name, :details, :price, :child_id, :daily, :category)
   end
 end
