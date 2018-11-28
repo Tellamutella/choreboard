@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_21_085219) do
+ActiveRecord::Schema.define(version: 2018_11_28_060947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2018_11_21_085219) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
-    t.integer "point"
+    t.integer "point", default: 0
     t.index ["email"], name: "index_children_on_email", unique: true
     t.index ["parent_id"], name: "index_children_on_parent_id"
     t.index ["reset_password_token"], name: "index_children_on_reset_password_token", unique: true
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 2018_11_21_085219) do
     t.boolean "claimed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "category"
     t.index ["child_id"], name: "index_rewards_on_child_id"
     t.index ["parent_id"], name: "index_rewards_on_parent_id"
   end
