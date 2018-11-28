@@ -3,12 +3,15 @@
         <% current_parent.children.each do |child| %>
         <li class="each-child" style="margin-top: 30px;">
             <h4 style='font-weight: bold; border-bottom:2px solid black;'><%= child.name %></h4>
-            <% if child.reward_requests.any? %>
+            <% if child.rewards.any? %>
             <h5>Wishlist:</h5>
             <div class="child-wishlist">
                     <% child.rewards.each do |reward| %>
                     <div class="each-request">
-                    <div><%= reward.name %></div>
+                    <div>
+                      <%= cl_image_tag "#{reward.icon}", height: 50 %>
+                      <%#= reward.name %>
+                    </div>
                     <% if reward.reward_requests.any? %>
                       <% req = reward.reward_requests.last %>
                     <!------------- AJAX reward request ---------->
