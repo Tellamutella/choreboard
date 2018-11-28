@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2018_11_21_085219) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
-    t.integer "point", default: 0
+    t.integer "point"
     t.index ["email"], name: "index_children_on_email", unique: true
     t.index ["parent_id"], name: "index_children_on_parent_id"
     t.index ["reset_password_token"], name: "index_children_on_reset_password_token", unique: true
