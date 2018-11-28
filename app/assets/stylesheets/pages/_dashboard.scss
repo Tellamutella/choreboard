@@ -17,6 +17,16 @@
 
 }
 
+.task-details {
+  display: none;
+  border: 2px solid ;
+  border-radius: 0px 40px 40px 40px;
+  min-width: 700px;
+  padding: 15px;
+  text-align:left;
+  margin-left: 25px;
+}
+
 .submission-details {
   width: 500px;
   height: 300px;
@@ -45,10 +55,13 @@
   justify-content: space-around;
   align-items: center;
   padding: 10px;
-  min-width: 100px;
+  max-width: 200px;
+  min-width: 200px;
+  max-height: 150px;
+  min-height: 100px;
   transition: ease-in-out 250ms;
-  background-color:rgb(253, 208, 102);
-  color:white;
+  border: 1px solid #333;
+  color:black;
   font-weight:bold;
   box-shadow: 1px 1px 1px #888888;
   margin:10px;
