@@ -1,8 +1,8 @@
   <div class="childrens-list">
     <ul style="list-style: none;">
         <% current_parent.children.each do |child| %>
-        <li class="each-child">
-            <h4 style='font-weight: bold;'><%= child.name %></h4>
+        <li class="each-child" style="margin-top: 30px;">
+            <h4 style='font-weight: bold; border-bottom:2px solid black;'><%= child.name %></h4>
             <% if child.reward_requests.any? %>
             <h5>Wishlist:</h5>
             <div class="child-wishlist">
@@ -46,6 +46,10 @@
                          <% task.task_submissions.each do |check| %>
                             <% if check.state == 1 %>
                                 <%= cl_image_tag 'checked_2' %>
+                            <% elsif check.state == 0 %>
+                                <%= cl_image_tag 'hourglass', height:32, width:32 %>
+                            <% elsif check.state == -1 %>
+                                <%= cl_image_tag 'error_2' %>
                             <%end %>
                          <%end %>
                         </div>
