@@ -10,7 +10,7 @@ Task.destroy_all
 Child.destroy_all
 Parent.destroy_all
 
-puts "Creating Nice Seeds......"
+puts "\nCreating Nice Seeds......"
 
 parent1 = Parent.create!(email: 'parent1@gmail.com', password: '123456', password_confirmation: '123456', name: 'Fisher')
 parent2 = Parent.create!(email: 'parent2@gmail.com', password: '123456', password_confirmation: '123456', name: 'Lee')
@@ -24,14 +24,21 @@ optional_tasks = { "Get A average": "With A+ in math", "Learn a piano piece": "A
 mandatory_tasks = {"Clean your room": "cloths off the floor and put away toys", "Wash dishes": "make sure u can everything in the sink", "Dusting": "dust off everything in the living room", "Sweeping": "sweep everything in the living room", 'Feeding pets': "feed bob and charlie"}
 
 big_rewards = {"PS4": "PS4 WITH 2 GAMES", "XBOX": "XBOX WITH GUN", "SWITCH": "SWITCH WITH MARIO GAME", "Red Dead Redemption 2": "at game stop", "weekend trip": "to a place of your choice" }
-small_rewards = { "1hr TV": "Don't sit too close to the screen", "1hr video game": "Volume not so loud", "Museum visit": "Pick a date of your choice", "cash": "$5"}
+small_rewards = { "1hr TV": "Don't sit too close to the screen", "1hr video game": "Volume not so loud", "Bike ride": "Pick a date of your choice", "cash": "$5"}
 
+puts "------------------------------"
+puts "Available mandatory tasks: #{mandatory_tasks.count}"
+puts "Available optional tasks: #{optional_tasks.count}"
+puts ""
+puts "Available daily rewards: #{small_rewards.count}"
+puts "Available longterm rewards: #{big_rewards.count}"
+puts "------------------------------"
 
 parent1.children.each do |child|
   10.times do
     task = child.tasks.new(
       parent: child.parent,
-      mandatory: [true,false].sample
+      mandatory: [true, false].sample
       )
     if task.mandatory
       task.objective, task.key_results = mandatory_tasks.to_a.sample
@@ -40,11 +47,11 @@ parent1.children.each do |child|
     end
     task.save
   end
-  5.times do
+  10.times do
     reward = child.rewards.new(
       parent: child.parent,
       price: rand(10..100),
-      daily: [true,false].sample
+      daily: [true, false].sample
       )
     if reward.daily
       reward.name, reward.details = small_rewards.to_a.sample
@@ -54,11 +61,7 @@ parent1.children.each do |child|
     reward.save
   end
   child.save
-  p child.name
-  puts "Tasks count:"
-  p child.tasks.count
-  puts "Rewards count:"
-  p child.rewards.count
+  puts "\n#{child.name}:"
+  puts "\s\sTasks count: #{child.tasks.count}"
+  puts "\s\sRewards count: #{child.rewards.count}"
 end
-
-p "Seeds Created"

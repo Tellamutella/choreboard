@@ -21,8 +21,16 @@ class TaskSubmissionsController < ApplicationController
 
   def update
     @task_submission = authorize TaskSubmission.find(params[:id])
-    @task_submission.state = params[:approved] == 'true' ? 1 : -1
+    @child = @task_submission.child
+    if params[:approved] == 'true'
+      @task_submission.state = 1
+      @child.point += 5
+      @child.save
+    else
+      @task_submission.state = -1
+    end
     @task_submission.save
+
     if @task_submission.save
         respond_to do |format|
           format.js

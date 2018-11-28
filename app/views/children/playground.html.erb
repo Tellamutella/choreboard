@@ -1,11 +1,111 @@
+<!-- <canvas id="playground-canvas" style="background-image: url('<%#= image_path 'pg' %>');">
+
+  <%#= image_tag 'quest', id: 'btn-quests'; %>
+  <%#= image_tag 'current', id: 'current-position'; %>
+  <%#= image_tag 'pika', id: 'pika'; %>
+  <%#= image_tag 'egg', id: 'egg'; %>
+
 <div class="container">
     <div class="container text-center">
-        <h2><%= current_child.name %></h2>
-        <h5><%= current_child.point %> points</h5>
-        <h4> [===============--------] <%= icon('fas', 'bomb') %></h4>
+        <h2><%#= current_child.name %></h2>
+        <h5><%#= current_child.point %> points</h5>
+    </div>
+    <%#= render 'rewards' %>
+    <hr>
+    <%#= render 'tasks' %>
+</div>
+
+</canvas> -->
+<!-- ####################################################### -->
+<div id="playground-map" style="background-image: url('<%= cl_image_path 'pg' %>');">
+    <div>
+        <div class="todays-quests">
+          <div class="text-center">
+            <h2><%= current_child.name %></h2>
+            <h5 id="points-left"><%= current_child.point %> points <span><%= icon('fas', 'bomb') %></span></h5>
+            <%= render 'rewards' %>
+            <hr>
+            </div>
+
+            <%= render 'tasks' %>
+        </div>
+            <div id="pikachu" class="btn-catch-pika"><%= cl_image_tag 'pika' %></div>
+            <div id="pos-1" class="pos-current"> <%= cl_image_tag 'current' if current_child.task_submissions.blank? || current_child.completed_tasks == 0 %> </div>
+           <!--  <div id="pos-2"></div> -->
+            <div id="pos-3"><%= cl_image_tag 'current' if current_child.completed_tasks == 1 %></div>
+            <!-- <div id="pos-4"></div> -->
+            <div id="pos-5"><%= cl_image_tag 'current' if current_child.completed_tasks == 2 %></div>
+            <!-- <div id="pos-6"></div> -->
+            <div id="pos-7"><%= cl_image_tag 'current' if current_child.completed_tasks == 3 %></div>
+           <!--  <div id="pos-8"></div>
+            <div id="pos-9"></div> -->
+            <div id="pos-10"><%= cl_image_tag 'current' if current_child.completed_tasks == 4 %></div>
+
 
     </div>
-    <%= render 'rewards' %>
-    <hr>
-    <%= render 'tasks' %>
 </div>
+<!-- ####################################################### -->
+<script>
+const btnCatch = document.querySelector('.btn-catch-pika');
+btnCatch.addEventListener('click', event => catchPika());
+
+function catchPika() {
+  const last = document.getElementById('pos-10');
+  if (last.innerHTML != '') {
+    next = document.getElementById('pikachu');
+    next.classList.add('pokeball-catched');
+    next.innerHTML = `<%= image_tag 'pokeball' %>`;
+    last.classList.remove('pos-current');
+    last.innerHTML = "";
+  }
+}
+
+// function moveToNext() {
+//   const current = document.querySelector('.pos-current');
+
+//   let next;
+//   if (current.nextElementSibling == null) {
+//     next = document.getElementById('pikachu');
+//     next.classList.add('pokeball-catched');
+//     next.innerHTML = `<%#= image_tag 'pokeball' %>`;
+//   } else {
+//     next = current.nextElementSibling;
+//     next.classList.add('pos-current');
+//     next.innerHTML = `<%#= cl_image_tag 'current' %>`;
+//   }
+
+//   current.classList.remove('pos-current');
+//   current.innerHTML = "";
+// }
+
+</script>
+
+<!-- <script>
+const canvas = document.getElementById('playground-canvas');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+const ctx = canvas.getContext("2d");
+ctx.fillStyle = "rgba(251, 232, 230, 0.8)";
+ctx.fillRect(window.innerWidth - 1000,0,window.innerWidth,window.innerHeight);
+// ctx.beginPath();
+// ctx.arc(495,550,10,0,2*Math.PI);
+// ctx.stroke();
+
+// quest icon at top left corder
+const quests = document.getElementById("btn-quests");
+console.log(quests);
+ctx.drawImage(quests, 30, 30);
+/////
+
+
+const current = document.getElementById("current-position");
+const pika = document.getElementById("pika");
+const egg = document.getElementById("egg");
+//ctx.drawImage(egg, 497, 525);
+ctx.drawImage(pika, 670, 590);
+ctx.drawImage(current, 370, 440);
+
+// child info
+ctx.font = "26px Arial";
+ctx.fillText(<%#= current_child.name %>, 1050, 30)
+</script> -->

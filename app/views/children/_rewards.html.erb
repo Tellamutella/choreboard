@@ -1,17 +1,19 @@
-<div class="all-rewards text-center">
-    <%= image_tag 'gift.gif', height: 150 %>
-    <h3>Rewards</h3>
-    <div>
-        <% if current_child.tasks.select(&:mandatory).any? && current_child.tasks.select(&:mandatory).all? {|task| task.task_submissions.any? ? task.task_submissions.last.state == 1 : false } %>
+<div class="all-rewards">
+  <div class="text-center">
+    <h4><%= cl_image_tag 'yay', height: 50 %> <!-- <strong>Rewards</strong> --></h4>
+    </div>
+    <div class="requests-status-list">
+        <% if current_child.done_all_mandatory? %>
         <% current_child.rewards.select(&:daily).each do |reward| %>
         <div class="each-reward">
           <% if reward.reward_requests.any? %>
               <% if reward.reward_requests.last.state == 0 %>
                 <%= reward.name %>
-                --- Pending...
+                <span class="pending">--- Pending...</span>
 
               <% elsif !reward.claimed %>
-                <div id="<%= reward.name.strip.split.join %>-request-link">
+
+                <div id="<%= current_child.name.strip %>-<%= reward.name.strip.split.join %>-request-link">
                   <%= link_to reward_reward_requests_path(reward), remote: true, method: :post do %>
                   <%= reward.name %>
                   <% end %>
@@ -19,23 +21,24 @@
 
               <% else %>
                 <%= reward.name %>
-                --- Claimed!
+                <span class="claimed">--- Claimed!</span>
               <% end %>
 
-              <div id="<%= reward.name.strip.split.join %>-request-state">(last request:
-                  <%= reward.reward_requests.last.state %>)
-              </div>
-          <% else %>
-          <div id="reward-request-link">
+              <div id="<%= current_child.name.strip %>-<%= reward.name.strip.split.join %>-request-state" style="color: #5D5A75;"></div>
+
+          <% else %> <!-- no reward requests yet -->
+              <div id="<%= current_child.name.strip %>-<%= reward.name.strip.split.join %>-request-link">
                   <%= link_to reward_reward_requests_path(reward), remote: true, method: :post do %>
-                  <%= reward.name %>
+                      <%= reward.name %>
                   <% end %>
-                </div>
+              </div>
+
+              <div id="<%= current_child.name.strip %>-<%= reward.name.strip.split.join %>-request-state" style="color: #5D5A75;"></div>
           <% end %>
         </div>
         <% end %>
         <% else %>
-        <h5>Finish all quests to claim your reward!</h5>
+        <h6>Finish all quests to claim your reward!</h6>
         <% end %>
     </div>
 </div>
