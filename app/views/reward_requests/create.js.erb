@@ -6,5 +6,5 @@ function requestReward(requestHTML, unlinkHTML) {
 }
 
 <% unless @reward_request.errors.any? %>
-  requestReward("(Submitted, current state: Pending.)", "<%= @reward.name %>");
+  requestReward("(Submitted, current state: <%=cl_image_tag 'hourglass', height: 40 %>.)", "<%= @reward.name %>");
 <% end %>

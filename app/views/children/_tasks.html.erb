@@ -1,5 +1,5 @@
 <div class="all-tasks">
-    <h4><%= icon('fas', 'chevron-right') %> Today's Quests:</h4>
+    <h4>         <%= cl_image_tag 'goal', height: 50 %></h4>
     <ul class="task-list">
         <% @tasks.select(&:mandatory).each do |task| %>
         <li>

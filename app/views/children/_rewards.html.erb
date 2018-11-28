@@ -9,7 +9,7 @@
           <% if reward.reward_requests.any? %>
               <% if reward.reward_requests.last.state == 0 %>
                 <%= reward.name %>
-                <span class="pending">--- Pending...</span>
+                <span class="pending">--- pending</span>
 
               <% elsif !reward.claimed %>
 
