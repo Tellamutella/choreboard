@@ -22,14 +22,6 @@
 
 .task-details {
   display: none;
-  border: 2px solid ;
-  border-radius: 0px 40px 40px 40px;
-  min-width: 700px;
-  padding: 15px;
-  text-align:left;
-}
-
-.playground-task-details {
   color: rgba(white, 0.9);
   border: 1px solid black;
   background: rgba(0,0,0,0.6);
@@ -37,8 +29,6 @@
   min-width: 280px;
   max-width: 25%;
   padding: 15px;
-  text-align:left;
-
 }
 
 .task-list {
@@ -85,7 +75,6 @@
 
 .visible-task-details {
   display: block;
-
 }
 
 .btn-make-submission {
