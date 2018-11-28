@@ -57,7 +57,7 @@ function moveToNext() {
   if (current.nextElementSibling == null) {
     next = document.getElementById('pikachu');
     next.classList.add('pokeball-catched');
-    next.innerHTML = `<%= image_tag 'pokeball' %>`;
+    next.innerHTML = `<%= cl_image_tag 'pokeball' %>`;
   } else {
     next = current.nextElementSibling;
     next.classList.add('pos-current');
