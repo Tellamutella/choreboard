@@ -26,6 +26,8 @@ mandatory_tasks = {"Clean your room": "cloths off the floor and put away toys", 
 big_rewards = {"PS4": "PS4 WITH 2 GAMES", "XBOX": "XBOX WITH GUN", "SWITCH": "SWITCH WITH MARIO GAME", "Red Dead Redemption 2": "at game stop", "weekend trip": "to a place of your choice" }
 small_rewards = { "1hr TV": "Don't sit too close to the screen", "1hr video game": "Volume not so loud", "Bike ride": "Pick a date of your choice", "cash": "$5"}
 
+categories = %w[Gaming Entertainment Outdoor Allowance Tablet Event Other]
+
 puts "------------------------------"
 puts "Available mandatory tasks: #{mandatory_tasks.count}"
 puts "Available optional tasks: #{optional_tasks.count}"
@@ -51,7 +53,9 @@ parent1.children.each do |child|
     reward = child.rewards.new(
       parent: child.parent,
       price: rand(10..100),
-      daily: [true, false].sample
+      daily: [true, false].sample,
+      # add real category later!
+      category: categories.sample
       )
     if reward.daily
       reward.name, reward.details = small_rewards.to_a.sample

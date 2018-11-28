@@ -4,13 +4,15 @@
         <% @tasks.select(&:mandatory).each do |task| %>
         <li>
             <div class="task-name">
-                <%= task.objective.capitalize %>
+                <%= task.objective.capitalize %> <span><%= task.completed? ? "(Done!)" : "(TODO)" %></span>
             </div>
-            <div class="task-details">
+            <div class="playground-task-details">
                 <h5>You will need to:</h5>
                 <p>
                     <%= task.key_results %>
-                    <%= cl_image_tag task.photo , height:300,  width:300  %>
+                    <% unless task.photo.to_s.empty? %>
+                        <%= cl_image_tag task.photo, height: 200, width: 300, crop: :fill %>
+                    <% end %>
                 </p>
                 <hr>
                 <% if task.task_submissions.any? %>
@@ -19,7 +21,7 @@
                 <% elsif task.task_submissions.last.state.positive? %>
                 Submission status: <%= icon('fas', 'check') %>
                 <% else %>
-                Submission status: <%= icon('fas', 'times') %> Please submit again!
+                Submission status: <%= icon('fas', 'times') %> <p>Please submit again!</p>
                 <div class="btn-make-submission">
                     Make a submission
                 </div>
@@ -27,7 +29,9 @@
                     <%= simple_form_for [task, task.task_submissions.new] do |f| %>
                     <%= f.input :comment %>
                     <%= f.input :photo %>
-                    <%= f.submit %>
+                    <%= f.button :button, class: 'send-submission', type: :submit do %>
+                      <%= icon('fas', 'check') %>
+                    <% end %>
                     <% end %>
                 </div>
                 <% end %>
