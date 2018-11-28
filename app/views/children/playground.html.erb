@@ -35,7 +35,7 @@ function catchPika() {
   if (last.innerHTML != '') {
     next = document.getElementById('pikachu');
     next.classList.add('pokeball-catched');
-    next.innerHTML = `<%= image_tag 'pokeball' %>`;
+    next.innerHTML = `<%= cl_image_tag 'pokeball' %>`;
     last.classList.remove('pos-current');
     last.innerHTML = "";
   }
