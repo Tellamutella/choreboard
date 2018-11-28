@@ -13,7 +13,7 @@
                       <% req = reward.reward_requests.last %>
                     <!------------- AJAX reward request ---------->
                       <% if req.state == 0 %>
-                        <div id="<%= req.reward.name.strip.split.join %>-actions">
+                        <div id="<%= child.name.strip %>-<%= req.reward.name.strip.split.join %>-actions">
                         <span>
                             <%= link_to reward_reward_request_path(req.reward, req, approved: true),
                             remote: true, method: :patch do %><%= icon('fas', 'check') %>Grant<% end %>
