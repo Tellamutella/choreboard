@@ -4,7 +4,7 @@
         <% @tasks.select(&:mandatory).each do |task| %>
         <li>
             <div class="task-name">
-                <%= task.objective.capitalize %> <span><%= task.completed? ? "(Done!)" : "(TODO)" %></span>
+                <%= task.objective.capitalize %> | <%= task.completed? ? "(Done!)" : "(TODO)" %>
             </div>
             <div class="playground-task-details">
                 <h5>You will need to:</h5>
@@ -74,10 +74,12 @@
 <!------------------>
 <script>
 const allTasks = document.querySelectorAll(".task-name");
+
 allTasks.forEach(task => {
     task.addEventListener('click', event => {
+      console.log(event.target);
         event.target.nextElementSibling.classList.toggle("visible-task-details");
-        event.target.classList.toggle("active-task");
+        event.target.classList.toggle("playground-active-task");
     })
 })
 

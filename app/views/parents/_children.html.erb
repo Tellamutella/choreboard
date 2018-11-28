@@ -1,127 +1,126 @@
-  <div class="childrens-list">
-    <ul style="list-style: none;">
-        <% current_parent.children.each do |child| %>
-        <li class="each-child" style="margin-top: 30px;">
-            <h4 style='font-weight: bold; border-bottom:2px solid black;'><%= child.name %></h4>
-            <% if child.rewards.any? %>
-            <h5>Wishlist:</h5>
-            <div class="child-wishlist">
-                    <% child.rewards.each do |reward| %>
-                    <div class="each-request">
-                    <div>
-                      <%= cl_image_tag "#{reward.icon}", height: 50 %>
-                      <%#= reward.name %>
-                    </div>
-                    <% if reward.reward_requests.any? %>
-                      <% req = reward.reward_requests.last %>
-                    <!------------- AJAX reward request ---------->
-                      <% if req.state == 0 %>
-                        <div id="<%= child.name.strip %>-<%= req.reward.name.strip.split.join %>-actions">
-                        <span>
+<div class="childrens-list">
+    <% current_parent.children.each do |child| %>
+    <div class="each-child">
+        <h3 class="child-name"><%= child.name %></h3>
+        <% if child.rewards.any? %> <!-- no wishlist display if no reward -->
+        <h5>Wishlist:</h5>
+        <div class="child-wishlist">
+            <% child.daily_rewards.each do |reward| %>
+            <div class="each-request">
+                <div>
+                    <%= image_tag "#{reward.tag}", height: 50 %>
+                    <%#= reward.name %>
+                </div>
+                <% if reward.reward_requests.any? %>
+                <% req = reward.reward_requests.last %>
+                <!------------- AJAX reward request ---------->
+                <% if req.state == 0 %>
+                <div id="<%= child.name.strip %>-<%= req.reward.name.strip.split.join %>-actions">
+                    <span>
                             <%= link_to reward_reward_request_path(req.reward, req, approved: true),
                             remote: true, method: :patch do %><%= icon('fas', 'check') %>Grant<% end %>
                           </span>
-                          <span>
+                    <span>
                             <%= link_to reward_reward_request_path(req.reward, req, approved: false),
                             remote: true, method: :patch do %><%= icon('fas', 'times') %> Say No<% end %>
                           </span>
-                        </div>
-                      <% else %>
-                        <div id="request-state">
-                        <%= req.state > 0 ? "(Granted)" : "(Rejected)" %>
-                        </div>
-                      <% end %>
-
-                    <!------------------------------------------>
-                    <% end %>
-                    </div>
-                    <% end %>
+                </div>
+                <% else %>
+                <div id="request-state">
+                    <%= req.state > 0 ? "(Granted)" : "(Rejected)" %>
+                </div>
+                <% end %>
+                <!-------- end of AJAX reward request ------>
+                <% end %>
             </div>
             <% end %>
+        </div>
+        <% end %> <!-- end of if child.rewards.any? -->
 
-            <div class="task-group ">
-              <div class="row">
+
+        <div class="task-group">
+            <div class="row">
                 <% child.tasks.each do |task| %>
-                    <div class="col-sm-3 col-xs-12">
-                      <div class="each-task">
+                <div class="col-sm-3 col-xs-6">
+                    <div class="each-task">
                         <div class="dashboard-task-name" data-id="<%= task.id %>">
-                         <p><%= task.objective.capitalize %></p>
-                         <% task.task_submissions.each do |check| %>
-                            <% if check.state == 1 %>
-                                <%= cl_image_tag 'checked_2' %>
-                            <% elsif check.state == 0 %>
-                                <%= cl_image_tag 'hourglass', height:32, width:32 %>
-                            <% elsif check.state == -1 %>
-                                <%= cl_image_tag 'error_2' %>
+                            <p>
+                                <%= task.objective.capitalize %>
+                            </p>
+                            <!-- indication of lask task submission state -->
+                            <!-- change to colored border later!!! -->
+                            <% unless task.task_submissions.blank? %>
+
+                                <% if task.task_submissions.last.state == 1 %>
+                                  <%= icon('fas', 'check') %>
+                                  <%#= cl_image_tag 'checked_2' %>
+                                <% elsif task.task_submissions.last.state == 0 %>
+                                  <%= icon('fas', 'hourglass-start') %>
+                                <%#= cl_image_tag 'hourglass', height:32, width:32 %>
+                                <% else %>
+                                  <%= icon('fas', 'times') %>
+                                  <%#= cl_image_tag 'error_2' %>
+                                <%end %>
                             <%end %>
-                         <%end %>
+                            <!-- end of indication -->
                         </div>
-                      </div>
                     </div>
+                </div>
                 <% end %>
-              </div>
-
-              <div class="row">
+            </div>
+            <div class="row">
                 <% child.tasks.each do |task| %>
-                   <!--  <div class="col-sm-6"> -->
-                      <div class="task-details" data-id="<%= task.id %>">
-                        <p><strong>Details:</strong><%= task.key_results %></p>
-                        <% if task.task_submissions.any? %>
-                          <% task.task_submissions.last(3).each do |submission| %>
-                            <div>
-                              <!------------- AJAX task submission ---------->
-
-                                  <% if submission.state == 0 %>
-                                    <div id="<%= task.objective.strip.split.join %>submission-actions">
-                                      <span>
+                <!--  <div class="col-sm-6"> -->
+                <div class="task-details" data-id="<%= task.id %>">
+                    <p><strong>Details:</strong>
+                        <%= task.key_results %>
+                    </p>
+                    <% if task.task_submissions.any? %>
+                    <% task.task_submissions.last(2).each do |submission| %>
+                    <div>
+                        <!------------- AJAX task submission ---------->
+                        <% if submission.state == 0 %>
+                        <div id="<%= task.objective.strip.split.join %>submission-actions">
+                            <span>
                                                   <%= link_to task_task_submission_path(task, submission, approved: true), remote: true, method: :patch do %>
                                                   <%= icon('fas', 'check') %> Approve
                                                   <% end %>
 
                                       </span>
-                                      <span>
+                            <span>
                                                     <%= link_to task_task_submission_path(task, submission, approved: false), remote: true, method: :patch do %>
                                                     <%= icon('fas', 'times') %> Disapprove
                                                     <% end %>
 
                                       </span>
-                                    </div>
-                                  <% else %>
-                                <!--   <div id="submission-state"> -->
-                                    <%# if submission.state > 0  %>
-                                      <%#= cl_image_tag 'checked_2' Approved%>
-                                      <%# else %>
-                                      <%#= cl_image_tag 'error_2' Rejected!%>
-                                      <%# end %>
-                                 <!--  </div> -->
-                                  <% end %>
-                              <!------------------------------------------>
-                                  <div class="submission-details">
-                                      <strong>Message:</strong><p>
-                                          <%= submission.comment %>
-                                      </p>
-                                      <% unless submission.photo.to_s.empty? %>
-                                      <%= cl_image_tag submission.photo, height: 200, width: 300, crop: :fill %>
-                                      <% end %>
-                                  </div>
-                            </div>
-                          <% end %>
+                        </div>
+                        <% else %>
+                        <!--   <div id="submission-state"> -->
+                        <%# if submission.state > 0  %>
+                        <%#= cl_image_tag 'checked_2' Approved%>
+                        <%# else %>
+                        <%#= cl_image_tag 'error_2' Rejected!%>
+                        <%# end %>
+                        <!--  </div> -->
                         <% end %>
-                      </div>
-                    <!-- </div> -->
+                        <!------------------------------------------>
+                        <div class="submission-details">
+                          <% unless submission.comment.strip.empty? %>
+                            <strong>Message:</strong>
+                            <p><%= submission.comment %></p>
+                            <% unless submission.photo.to_s.empty? %>
+                            <%= cl_image_tag submission.photo, height: 200, width: 300, crop: :fill %>
+                            <% end %>
+                          <% end %>
+                        </div>
+                    </div>
+                    <% end %>
+                    <% end %>
+                </div>
+                <!-- </div> -->
                 <% end %>
-              </div>
-
-
-
-
-
-
             </div>
-
-        </li>
-        <% end %>
-
-    </ul>
+        </div>
+    </div>
+    <% end %>
 </div>
-

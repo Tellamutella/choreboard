@@ -1,7 +1,7 @@
 <div class='add-feature'>
-  <%=cl_image_tag 'children',  height: 34, width: 34, class: "dashboard-icon"%>
-  <h3>Child:</h3>
-  <%=cl_image_tag 'plus', height: 34, width: 34,class: "test btn-add-object" %>
+  <%= image_tag 'plant',  height: 50, width: 50, class: "dashboard-icon"%>
+  <h4>Child </h4>
+  <%= image_tag 'plus', height: 30, width: 30, class: "test btn-add-object" %>
 </div>
     <!-- The Modal -->
     <div class="modal">
@@ -9,18 +9,18 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <%= simple_form_for @child, url: add_child_path do |f| %>
-            <%= f.input :email,
-                required: true,
-                autofocus: true ,
-                input_html: { autocomplete: "email" }%>
             <%= f.input :name,
                 required: true,
                 autofocus: true %>
+            <%= f.input :email, :as => :hidden, :input_html => { :value => "doe@beans.com" } %>
+ <!--           # required: true,
+                # autofocus: true ,
+                # input_html: { autocomplete: "email" } -->
             <%= f.input :password,
                 required: true,
                 hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
                 input_html: { autocomplete: "new-password" } %>
-            <%= f.submit %>
+            <%= f.submit "Add Child", class: 'btn btn-default' %>
             <% end %>
         </div>
     </div>
