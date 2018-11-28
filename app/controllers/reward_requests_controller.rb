@@ -21,7 +21,8 @@ class RewardRequestsController < ApplicationController
         respond_to do |format|
           format.js
         end
-    # else
+    else
+      redirect_to playground_path
     #   respond_to do |format|
     #      format.html { render ... }
     #      format.js
