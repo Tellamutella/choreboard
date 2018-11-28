@@ -10,6 +10,7 @@
                 <h5>You will need to:</h5>
                 <p>
                     <%= task.key_results %>
+                    <%= cl_image_tag task.photo , height:300,  width:300  %>
                 </p>
                 <hr>
                 <% if task.task_submissions.any? %>
