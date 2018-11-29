@@ -22,12 +22,18 @@
 // const showChildTab = window.showChildTab
 
 const showChildTab = function() {
-  let childNames = document.querySelectorAll(".child-name");
+  let childNames = document.querySelectorAll(".each-child");
   let taskGroups = document.querySelectorAll(".task-group");
   childNames.forEach((childName) => {
     childName.addEventListener('click', (event) => {
+      document.querySelectorAll(".selected-child").forEach(e => {
+        e.classList.remove("selected-child");
+      })
+      console.log(childName);
+      childName.classList.add('selected-child');
       const welcomeContent = document.getElementById('welcome-content');
       welcomeContent.classList.add('hidden');
+      console.log(childName);
 
       let id = childName.dataset.id;
       let selectedTaskGroup = taskGroups.forEach((taskGroup) => {
