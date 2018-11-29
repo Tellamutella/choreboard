@@ -1,17 +1,25 @@
 <div class="all-tasks">
-    <%= cl_image_tag 'goal', height: 50 %>
+    <div class="text-center"><%= cl_image_tag 'goal', height: 50 %></div>
     <ul class="task-list">
+      <br>
         <% @tasks.select(&:mandatory).each do |task| %>
         <li>
             <div class="task-name">
-                <%= task.objective.capitalize %> | <%= task.completed? ? "(Done!)" : "(TODO)" %>
+                <%= task.objective.capitalize %>
+                <% if task.completed? %>
+                  <%= cl_image_tag 'checked_2', height: 20 %>
+                <% elsif task.task_submissions.any? && task.task_submissions.last.state == 0 %>
+                  <%= cl_image_tag 'refresh', height: 20 %>
+                <% elsif task.task_submissions.any? && task.task_submissions.last.state == -1 %>
+                  <%= cl_image_tag 'error_2', height: 20 %>
+                <% end %>
             </div>
             <div class="playground-task-details">
                 <h5>You will need to:</h5>
                 <p>
                     <%= task.key_results %>
                     <% unless task.photo.to_s.empty? %>
-                        <%= cl_image_tag task.photo, height: 200, width: 300, crop: :fill %>
+                        <%= cl_image_tag task.photo, height: 200, width: 250, crop: :fill %>
                     <% end %>
                 </p>
                 <hr>
