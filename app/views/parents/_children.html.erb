@@ -82,41 +82,34 @@
                     <% if task.task_submissions.any? %>
                     <% task.task_submissions.last(2).each do |submission| %>
                     <div>
+                        <div class="submission-details">
+                            <% unless submission.comment.strip.empty? %>
+                                <strong>Message:</strong>
+                                <p><%= submission.comment %></p>
+                            <% end %>
+                            <% unless submission.photo.to_s.empty? %>
+                                <%= cl_image_tag submission.photo, height: 300, width: 400, crop: :fill %>
+                            <% end %>
+                        </div>
                         <!------------- AJAX task submission ---------->
                         <% if submission.state == 0 %>
-                        <div id="<%= task.objective.strip.split.join %>submission-actions">
-                            <span>
-                                                  <%= link_to task_task_submission_path(task, submission, approved: true), remote: true, method: :patch do %>
-                                                  <%= icon('fas', 'check') %> Approve
-                                                  <% end %>
-
-                                      </span>
-                            <span>
-                                                    <%= link_to task_task_submission_path(task, submission, approved: false), remote: true, method: :patch do %>
-                                                    <%= icon('fas', 'times') %> Disapprove
-                                                    <% end %>
-
-                                      </span>
-                        </div>
+                            <div id="<%= task.objective.strip.split.join %>submission-actions">
+                                <span><%= link_to task_task_submission_path(task, submission, approved: true), remote: true, method: :patch do %><%= icon('fas', 'check') %> Approve<% end %></span>
+                                <span><%= link_to task_task_submission_path(task, submission, approved: false), remote: true, method: :patch do %><%= icon('fas', 'times') %> Disapprove<% end %></span>
+                            </div>
+                            <hr>
                         <% else %>
-                        <!--   <div id="submission-state"> -->
-                        <%# if submission.state > 0  %>
-                        <%#= cl_image_tag 'checked_2' Approved%>
-                        <%# else %>
-                        <%#= cl_image_tag 'error_2' Rejected!%>
-                        <%# end %>
-                        <!--  </div> -->
+                              <div id="submission-state">
+                                  <%  if submission.state > 0  %>
+                                  Last submission: Approved
+                                  <%  else %>
+                                  Last submission: Rejected
+                                  <%  end %>
+                              </div>
+                              <hr>
                         <% end %>
                         <!------------------------------------------>
-                        <div class="submission-details">
-                          <% unless submission.comment.strip.empty? %>
-                            <strong>Message:</strong>
-                            <p><%= submission.comment %></p>
-                            <% unless submission.photo.to_s.empty? %>
-                            <%= cl_image_tag submission.photo, height: 200, width: 300, crop: :fill %>
-                            <% end %>
-                          <% end %>
-                        </div>
+
                     </div>
                     <% end %>
                     <% end %>
