@@ -8,7 +8,7 @@
             <% child.daily_rewards.each do |reward| %>
             <div class="each-request">
                 <div>
-                    <%= image_tag "#{reward.tag}", height: 50 %>
+                    <%= cl_image_tag "#{reward.tag}", height: 50 %>
                     <%#= reward.name %>
                 </div>
                 <% if reward.reward_requests.any? %>
