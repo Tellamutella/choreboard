@@ -1,7 +1,7 @@
 <div class='add-feature'>
-    <%= image_tag 'pinwheel', height: 50, width: 50, class: "dashboard-icon"%>
+    <%= cl_image_tag 'pinwheel', height: 50, width: 50, class: "dashboard-icon"%>
     <h4> Reward</h4>
-    <%= image_tag 'plus', height: 30, width: 30,class: "test btn-add-object" %>
+    <%= cl_image_tag 'plus', height: 30, width: 30,class: "test btn-add-object" %>
 </div>
 <div>
     <!-- The Modal -->
@@ -22,7 +22,7 @@
     </div>
     <hr>
     <!----------- Children's rewards list -------------->
-    <h4> Goals <%= image_tag 'party', height: 30 %></h4>
+    <h4> Goals <%= cl_image_tag 'party', height: 30 %></h4>
     <div>
         <% current_parent.children.each do |child| %>
         <div style="font-weight: bold; font-size: 20px;">
