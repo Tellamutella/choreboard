@@ -22,8 +22,6 @@
   }
 }
 
-
-
 .task-details {
   display: none;
   border: 2px solid ;
@@ -99,6 +97,7 @@
 
 .each-child {
   margin-bottom: 50px;
+  display: inline-block;
 
   .child-name {
     max-width: 200px;

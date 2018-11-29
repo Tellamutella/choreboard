@@ -26,6 +26,9 @@ const showChildTab = function() {
   let taskGroups = document.querySelectorAll(".task-group");
   childNames.forEach((childName) => {
     childName.addEventListener('click', (event) => {
+      const welcomeContent = document.getElementById('welcome-content');
+      welcomeContent.classList.add('hidden');
+
       let id = childName.dataset.id;
       let selectedTaskGroup = taskGroups.forEach((taskGroup) => {
         taskGroup.classList.add('hidden');
