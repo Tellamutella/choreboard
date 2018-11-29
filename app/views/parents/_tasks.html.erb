@@ -13,15 +13,15 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <%= simple_form_for @task do |f| %>
-            <%= f.input :objective %>
-            <%= f.input :key_results %>
+            <%= f.input :objective, label: 'Chore Name' %>
+            <%= f.input :key_results, label: 'Instructions' %>
             <%= f.input :photo %>
             <%= f.input :photo_cache, as: :hidden %>
             <% @list = current_parent.children.map do |child| %>
             <% [child.id, child.name] %>
             <% end %>
             <%= f.input :child_id, collection: @list, label_method: :second, value_method: :first %>
-            <%= f.input :mandatory %>
+            <%= f.input :mandatory, label: 'Daily?' %>
             <div class="text-center">
             <%= f.submit 'Assign Task', class: 'btn btn-warning' %>
             </div>
