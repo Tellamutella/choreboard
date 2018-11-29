@@ -1,7 +1,8 @@
 <div class="childrens-list">
     <% current_parent.children.each do |child| %>
     <div class="each-child">
-        <h3 class="child-name"><%= child.name %></h3>
+        <h3 class="child-name" data-id="<%= child.id %>"><%= child.name %></h3>
+        <div class="task-group hidden" data-id="<%= child.id %>">
         <% if child.rewards.any? %> <!-- no wishlist display if no reward -->
         <h5>Wishlist:</h5>
         <div class="child-wishlist">
@@ -38,7 +39,7 @@
         <% end %> <!-- end of if child.rewards.any? -->
 
 
-        <div class="task-group">
+        <div>
             <div class="row">
                 <% child.tasks.each do |task| %>
                 <div class="col-sm-3 col-xs-6">
@@ -121,6 +122,7 @@
                 <% end %>
             </div>
         </div>
+      </div>
     </div>
     <% end %>
 </div>
