@@ -9,7 +9,7 @@
           <% if reward.reward_requests.any? %>
               <% if reward.reward_requests.last.state == 0 %>
                 <%#= reward.name %>
-                <%= cl_image_tag "#{reward.icon}", height: 50 %>
+                <%= cl_image_tag "#{reward.tag}", height: 50 %>
                 <span class="pending"> pending</span>
 
               <% elsif !reward.claimed %>
@@ -17,13 +17,13 @@
                 <div id="<%= current_child.name.strip %>-<%= reward.name.strip.split.join %>-request-link">
                   <%= link_to reward_reward_requests_path(reward), remote: true, method: :post do %>
                   <%#= reward.name %>
-                  <%= cl_image_tag "#{reward.icon}", height: 50 %>
+                  <%= cl_image_tag "#{reward.tag}", height: 50 %>
                   <% end %>
                 </div>
 
               <% else %>
                 <%#= reward.name %>
-                <%= cl_image_tag "#{reward.icon}", height: 50 %>
+                <%= cl_image_tag "#{reward.tag}", height: 50 %>
                 <span class="claimed"> Claimed!</span>
               <% end %>
 
@@ -33,7 +33,7 @@
               <div id="<%= current_child.name.strip %>-<%= reward.name.strip.split.join %>-request-link">
                   <%= link_to reward_reward_requests_path(reward), remote: true, method: :post do %>
                       <%#= reward.name %>
-                      <%= cl_image_tag "#{reward.icon}", height: 50 %>
+                      <%= cl_image_tag "#{reward.tag}", height: 50 %>
                   <% end %>
               </div>
 
