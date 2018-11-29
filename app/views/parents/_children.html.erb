@@ -6,7 +6,7 @@
 
 <div id="welcome-content">
   <h4><strong>Hello <%= current_parent.name %>, how are the beans doing today? </strong></h4>
-  <div><%= image_tag 'two-pots', width: 500%></div>
+  <div><%= cl_image_tag 'two-pots', width: 500%></div>
 </div>
 
 <% current_parent.children.each do |child| %>
