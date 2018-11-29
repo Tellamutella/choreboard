@@ -17,7 +17,7 @@
   min-width: 400px;
   padding: 20px;
   height: calc(100vh - 60px);
-  background: rgba(0,0,0,0.2);
+  background: rgba(0,0,0,0.35);
 }
 
 .task-details {
@@ -56,11 +56,11 @@
     color: #6EA2B2;
   }
 
-  span.pending {
+  .pending {
     color: #C49235;
   }
 
-  span.claimed {
+  .claimed {
     color: #7B874E;
   }
 }
@@ -78,9 +78,10 @@
   padding: 10px;
   width: 250px;
   transition: ease-in-out 250ms;
+  color: rgba(white, 0.9);
+  font-weight: bold;
   &:hover {
     cursor: pointer;
-    font-weight: bold;
   }
 }
 
