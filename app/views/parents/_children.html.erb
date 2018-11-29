@@ -1,7 +1,7 @@
-<div class="childrens-list">
+
     <% current_parent.children.each do |child| %>
     <div class="each-child">
-        <h3 class="child-name"><%= child.name %></h3>
+        <h4 class="child-name"><%= child.name %></h4>
         <% if child.rewards.any? %> <!-- no wishlist display if no reward -->
         <h5>Wishlist:</h5>
         <div class="child-wishlist">
@@ -40,33 +40,37 @@
 
         <div class="task-group">
             <div class="row">
-                <% child.tasks.each do |task| %>
-                <div class="col-sm-3 col-xs-6">
-                    <div class="each-task">
-                        <div class="dashboard-task-name" data-id="<%= task.id %>">
-                            <p>
-                                <%= task.objective.capitalize %>
-                            </p>
-                            <!-- indication of lask task submission state -->
-                            <!-- change to colored border later!!! -->
-                            <% unless task.task_submissions.blank? %>
+              <% if child.tasks.any? %>
+                  <% child.tasks.each do |task| %>
+                      <div class="col-sm-3 col-xs-6 each-task">
 
-                                <% if task.task_submissions.last.state == 1 %>
-                                  <%= icon('fas', 'check') %>
-                                  <%#= cl_image_tag 'checked_2' %>
-                                <% elsif task.task_submissions.last.state == 0 %>
-                                  <%= icon('fas', 'hourglass-start') %>
-                                <%#= cl_image_tag 'hourglass', height:32, width:32 %>
-                                <% else %>
-                                  <%= icon('fas', 'times') %>
-                                  <%#= cl_image_tag 'error_2' %>
-                                <%end %>
-                            <%end %>
-                            <!-- end of indication -->
-                        </div>
-                    </div>
-                </div>
-                <% end %>
+                          <div class="dashboard-task-name" data-id="<%= task.id %>">
+                              <p>
+                                  <%= task.objective.capitalize %>
+                              </p>
+                              <!-- indication of lask task submission state -->
+                              <!-- change to colored border later!!! -->
+                              <% unless task.task_submissions.blank? %>
+
+                                  <% if task.task_submissions.last.state == 1 %>
+                                    <%= icon('fas', 'check') %>
+                                    <%#= cl_image_tag 'checked_2' %>
+                                  <% elsif task.task_submissions.last.state == 0 %>
+                                    <%= icon('fas', 'hourglass-start') %>
+                                  <%#= cl_image_tag 'hourglass', height:32, width:32 %>
+                                  <% else %>
+                                    <%= icon('fas', 'times') %>
+                                    <%#= cl_image_tag 'error_2' %>
+                                  <%end %>
+                              <%end %>
+                              <!-- end of indication -->
+                          </div>
+
+                      </div>
+                  <% end %>
+              <% else %>
+                  <div class="container"><h5>No tasks yet! </h5></div>
+              <% end %>
             </div>
             <div class="row">
                 <% child.tasks.each do |task| %>
@@ -78,41 +82,34 @@
                     <% if task.task_submissions.any? %>
                     <% task.task_submissions.last(2).each do |submission| %>
                     <div>
+                        <div class="submission-details">
+                            <% unless submission.comment.strip.empty? %>
+                                <strong>Message:</strong>
+                                <p><%= submission.comment %></p>
+                            <% end %>
+                            <% unless submission.photo.to_s.empty? %>
+                                <%= cl_image_tag submission.photo, height: 300, width: 400, crop: :fill %>
+                            <% end %>
+                        </div>
                         <!------------- AJAX task submission ---------->
                         <% if submission.state == 0 %>
-                        <div id="<%= task.objective.strip.split.join %>submission-actions">
-                            <span>
-                                                  <%= link_to task_task_submission_path(task, submission, approved: true), remote: true, method: :patch do %>
-                                                  <%= icon('fas', 'check') %> Approve
-                                                  <% end %>
-
-                                      </span>
-                            <span>
-                                                    <%= link_to task_task_submission_path(task, submission, approved: false), remote: true, method: :patch do %>
-                                                    <%= icon('fas', 'times') %> Disapprove
-                                                    <% end %>
-
-                                      </span>
-                        </div>
+                            <div id="<%= task.objective.strip.split.join %>submission-actions">
+                                <span><%= link_to task_task_submission_path(task, submission, approved: true), remote: true, method: :patch do %><%= icon('fas', 'check') %> Approve<% end %></span>
+                                <span><%= link_to task_task_submission_path(task, submission, approved: false), remote: true, method: :patch do %><%= icon('fas', 'times') %> Disapprove<% end %></span>
+                            </div>
+                            <hr>
                         <% else %>
-                        <!--   <div id="submission-state"> -->
-                        <%# if submission.state > 0  %>
-                        <%#= cl_image_tag 'checked_2' Approved%>
-                        <%# else %>
-                        <%#= cl_image_tag 'error_2' Rejected!%>
-                        <%# end %>
-                        <!--  </div> -->
+                              <div id="submission-state">
+                                  <%  if submission.state > 0  %>
+                                  Last submission: Approved
+                                  <%  else %>
+                                  Last submission: Rejected
+                                  <%  end %>
+                              </div>
+                              <hr>
                         <% end %>
                         <!------------------------------------------>
-                        <div class="submission-details">
-                          <% unless submission.comment.strip.empty? %>
-                            <strong>Message:</strong>
-                            <p><%= submission.comment %></p>
-                            <% unless submission.photo.to_s.empty? %>
-                            <%= cl_image_tag submission.photo, height: 200, width: 300, crop: :fill %>
-                            <% end %>
-                          <% end %>
-                        </div>
+
                     </div>
                     <% end %>
                     <% end %>
@@ -123,4 +120,3 @@
         </div>
     </div>
     <% end %>
-</div>

@@ -4,11 +4,10 @@
 <!-- create reward button, daily rewards list  -->
 <div class="dashboard-wrapper">
     <div class="row">
-        <div class="welcome-col">
-            <div class="col-xs-12 col-md-3">
-                <h2>Welcome!</h2>
-                <p>(
-                    <%= current_parent.email %>)</p>
+
+            <div class="welcome-col col-xs-12 col-md-3">
+                <h3>Welcome!</h3>
+                <h5><%= current_parent.name %> | <%= current_parent.children.count %> beans</h5>
                 <div>
                     <%= render 'add_child', child: @child %>
                 </div>
@@ -19,12 +18,12 @@
                     <%= render 'rewards' %>
                 </div>
             </div>
-        </div>
-        <div class="children-info">
-            <div class="col-xs-12 col-md-9">
+
+
+            <div class="children-list col-xs-12 col-md-9">
                 <%= render 'children' %>
             </div>
-        </div>
+
     </div>
 </div>
 <!------------------------------------------->

@@ -16,7 +16,9 @@
             <%= f.input :price , label: 'Points needed'%>
             <%= f.input :child_id, collection: @list , label_method: :second, value_method: :first %>
             <%= f.input :daily %>
-            <%= f.submit 'Add Reward', class: 'btn btn-default'%>
+            <div class="text-center">
+            <%= f.submit 'Add Reward', class: 'btn btn-warning'%>
+            </div>
             <% end %>
         </div>
     </div>

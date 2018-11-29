@@ -67,10 +67,10 @@
 
 .requests-status-list {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
 
   .each-reward {
-    padding: 5px;
+    padding: 10px;
   }
 }
 

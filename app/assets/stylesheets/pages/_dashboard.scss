@@ -1,17 +1,28 @@
-.reward {
-    padding: 5px;
-}
 
 .each-request {
   border-right: 1px dashed black;
   padding: 10px;
 }
 
-// .child-wishlist,
-// .submission-details {
-//     margin: 10px;
+.dashboard-wrapper {
+  padding: 0 50px;
 
-// }
+  .welcome-col, .children-list {
+    height: calc(100vh - 70px);
+    overflow: auto;
+    padding: 0 30px;
+  }
+
+  .children-list {
+    padding-top: 25px;
+  }
+
+  .welcome-col {
+    border-right: 1px solid rgba(0,0,0,0.07);
+  }
+}
+
+
 
 .task-details {
   display: none;
@@ -20,7 +31,7 @@
   min-width: 600px;
   padding: 15px;
   text-align:left;
-  margin-left: 25px;
+  margin: 25px;
 }
 
 .child-wishlist {
@@ -28,8 +39,7 @@
 }
 
 .active-task {
-  background: rgba(0,0,0, 0.1);
-  border: none;
+  background-color: rgba(#78BA00, 0.4);
 }
 
 .each-task {
@@ -48,29 +58,18 @@
   // max-height: 150px;
   min-height: 100px;
   transition: ease-in-out 250ms;
-  border: 1px solid #333;
-  color:black;
+  border: 1px solid rgba(#333, 0.7);
+  color: #333;
   font-weight:bold;
-  box-shadow: 1px 1px 1px #888888;
-  margin:10px;
+  border-radius: 5px;
+  box-shadow: 1px 18px 18px -22px #888888;
+  margin: 15px 10px;
   &:hover {
     cursor: pointer;
-    opacity: 0.8;
+    box-shadow: 1px 18px 18px -20px black;
   }
   p {
     margin-bottom: 0
-  }
-}
-
-.children-banner {
-  background-color: rgb(242, 187, 67);
-  border-radius: 15px;
-  height:50px;
-  color:white;
-   box-shadow: 2px 2px 2px #888888;
-  h3 {
-    padding:10px;
-    font-weight:bold;
   }
 }
 
@@ -92,13 +91,7 @@
   display:block;
 }
 
-.dashboard-wrapper {
-  margin: 30px 50px;
-}
 
-.children-info {
-  padding: 30px;
-}
 
 .each-child {
   margin-bottom: 50px;
@@ -107,9 +100,11 @@
     max-width: 200px;
     margin: 0;
     padding: 5px 20px;
-    color: #444;
+    color: #555;
+    font-family: sans-serif;
     border-radius: 15px 15px 0 0;
-    background: rgba(#cdc1ff, 0.7);
+
+    background: rgba(#FFC857, 0.7);
   }
 }
 
