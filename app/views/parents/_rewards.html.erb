@@ -16,13 +16,15 @@
             <%= f.input :price , label: 'Points needed'%>
             <%= f.input :child_id, collection: @list , label_method: :second, value_method: :first %>
             <%= f.input :daily %>
-            <%= f.submit 'Add Reward', class: 'btn btn-default'%>
+            <div class="text-center">
+            <%= f.submit 'Add Reward', class: 'btn btn-warning'%>
+            </div>
             <% end %>
         </div>
     </div>
     <hr>
     <!----------- Children's rewards list -------------->
-    <h4> Goals <%= image_tag 'party', height: 30 %></h4>
+    <h3> Goals <%= image_tag 'party', height: 30 %></h3>
     <div>
         <% current_parent.children.each do |child| %>
         <div style="font-weight: bold; font-size: 20px;">

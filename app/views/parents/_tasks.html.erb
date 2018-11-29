@@ -22,7 +22,9 @@
             <% end %>
             <%= f.input :child_id, collection: @list, label_method: :second, value_method: :first %>
             <%= f.input :mandatory %>
-            <%= f.submit 'Assign Task', class: 'btn btn-default' %>
+            <div class="text-center">
+            <%= f.submit 'Assign Task', class: 'btn btn-warning' %>
+            </div>
             <% end %>
         </div>
     </div>
