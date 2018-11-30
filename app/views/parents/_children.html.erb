@@ -21,6 +21,7 @@
         <div class="child-wishlist">
             <% child.daily_rewards.each do |reward| %>
             <div class="each-request">
+                <p> <%= reward.name %></p>
                 <div>
                     <%= cl_image_tag "#{reward.tag}", height: 50 %>
                     <%#= reward.name %>
