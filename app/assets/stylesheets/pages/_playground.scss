@@ -133,6 +133,12 @@
   right: 29%;
 }
 
+#gotcha {
+  position: absolute;
+  bottom: 31%;
+  right: 28%;
+}
+
 .pokeball-catched {
   animation: 1.7s roll-ball;
 }
@@ -149,63 +155,68 @@
   }
 }
 
+.btn-catch-pika:hover {
+  cursor: pointer;
+}
+
 // ########### COORDINATES FOR 10 FLOATING ISLANDS ###############
 #pos-1 {
   position: absolute;
-  top: 44%;
+  top: 43%;
   left: 40%;
 }
 
 #pos-2 {
   position: absolute;
-  top: 47%;
+  top: 46%;
   left: 44%;
 }
 
 #pos-3 {
   position: absolute;
-  top: 53%;
+  top: 52%;
   left: 47%;
 }
 
 #pos-4 {
   position: absolute;
-  top: 55.5%;
+  top: 54%;
   left: 50%;
 }
 
 #pos-5 {
   position: absolute;
-  top: 58%;
+  top: 56%;
   left: 52%;
 }
 
 #pos-6 {
   position: absolute;
-  top: 64%;
+  top: 62%;
   left: 51%;
 }
 
 #pos-7 {
   position: absolute;
-  top: 69%;
+  top: 67%;
   left: 49%;
 }
 
 #pos-8 {
   position: absolute;
-  top: 75.5%;
+  top: 73.5%;
   left: 52%;
 }
 
 #pos-9 {
   position: absolute;
-  top: 81%;
+  top: 79%;
   left: 53.5%;
 }
 
+// changed bc of ipad
 #pos-10 {
   position: absolute;
-  top: 84%;
+  top: 80%;
   left: 57%;
 }

@@ -2,7 +2,7 @@
   <div class="children-namelist">
     <% current_parent.children.each do |c| %>
     <div class="each-child" data-id="<%= c.id %>">
-        <h4 class="child-name" ><%= c.name.capitalize %> <%= icon('fas', 'stopwatch') if c.pending_submissions? %></h4>
+        <h4 class="child-name" > <%= c.name.capitalize %> <%= icon('fas', 'stopwatch') if c.pending_submissions? || c.pending_requests? %></h4>
     </div>
 <% end %>
   </div>

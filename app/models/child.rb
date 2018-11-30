@@ -39,4 +39,12 @@ class Child < ApplicationRecord
       false
     end
   end
+
+  def pending_requests?
+    if rewards.any? && reward_requests.any?
+      rewards.select { |r| r.reward_requests.any? && r.reward_requests.last.state.zero? }.any?
+    else
+      false
+    end
+  end
 end
