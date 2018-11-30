@@ -10,7 +10,7 @@
 
             <%= render 'tasks' %>
         </div>
-            <div id="gotcha"><%= image_tag 'gotcha' if current_child.done_all_mandatory? %></div>
+            <div id="gotcha"><%= cl_image_tag 'gotcha' if current_child.done_all_mandatory? %></div>
             <div id="pikachu" class="btn-catch-pika"><%= cl_image_tag 'pika' %></div>
             <div id="pos-1" class="pos-current"> <%= cl_image_tag 'current' if current_child.task_submissions.blank? || current_child.completed_tasks == 0 %> </div>
             <div id="pos-2"><%= cl_image_tag 'current' if current_child.progress == 2.fdiv(10) %></div>
