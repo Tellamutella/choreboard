@@ -53,7 +53,7 @@ parent1.children.each do |child|
     reward = child.rewards.new(
       parent: child.parent,
       price: rand(10..100),
-      daily: [true, false].sample,
+      daily: true,
       # add real category later!
       category: categories.sample
       )
