@@ -9,7 +9,7 @@
           <% if reward.reward_requests.any? %>
               <% if reward.reward_requests.last.state == 0 %>
                 <div><%= reward.name %></div>
-                <%= cl_image_tag "#{reward.tag}", height: 50 %>
+                <div style="text-align:center;"><%= cl_image_tag "#{reward.tag}", height: 50 %></div>
                 <div class="pending" style="text-align: center;"><%= icon('fas', 'hourglass-start')%></div>
 
               <% elsif !reward.claimed %>
@@ -24,7 +24,7 @@
               <% else %>
                 <%#= reward.name %>
                 <%= cl_image_tag "#{reward.tag}", height: 50 %>
-                <div class="claimed"> Claimed!</div>
+                <div class="claimed" style='color: #2CBE4E; text-align:center; font-size: 22px;'> <%= icon('fas', 'check')%></div>
               <% end %>
 
               <div id="<%= current_child.name.strip %>-<%= reward.name.strip.split.join %>-request-state" style="color: #5D5A75;"></div>
