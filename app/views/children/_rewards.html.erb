@@ -8,9 +8,9 @@
         <div class="each-reward">
           <% if reward.reward_requests.any? %>
               <% if reward.reward_requests.last.state == 0 %>
-                <%#= reward.name %>
+                <div><%= reward.name %></div>
                 <%= cl_image_tag "#{reward.tag}", height: 50 %>
-                <div class="pending">Pending</div>
+                <div class="pending" style="text-align: center;"><%= icon('fas', 'hourglass-start')%></div>
 
               <% elsif !reward.claimed %>
 
