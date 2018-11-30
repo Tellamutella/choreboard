@@ -31,4 +31,12 @@ class Child < ApplicationRecord
   def progress
     completed_tasks.fdiv(mandatory_tasks.count).round(1)
   end
+
+  def pending_submissions?
+    if tasks.any? && task_submissions.any?
+      tasks.select { |t| t.task_submissions.any? && t.task_submissions.last.state.zero? }.any?
+    else
+      false
+    end
+  end
 end

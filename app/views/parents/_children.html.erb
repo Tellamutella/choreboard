@@ -1,11 +1,15 @@
-<% current_parent.children.each do |c| %>
-    <div class="each-child">
-        <h4 class="child-name" data-id="<%= c.id %>"><%= c.name %></h4>
+<div class="children-info">
+  <div class="children-namelist">
+    <% current_parent.children.each do |c| %>
+    <div class="each-child" data-id="<%= c.id %>">
+        <h4 class="child-name" ><%= c.name.capitalize %> <%= icon('fas', 'stopwatch') if c.pending_submissions? %></h4>
     </div>
 <% end %>
+  </div>
+
 
 <div id="welcome-content">
-  <h4><strong>Hello <%= current_parent.name %>, how are the beans doing today? </strong></h4>
+  <h4><strong>Hello <%= current_parent.name.capitalize %>, how are the beans doing today? </strong></h4>
   <div><%= cl_image_tag 'two-pots', width: 500%></div>
 </div>
 
@@ -28,11 +32,11 @@
                 <div id="<%= child.name.strip %>-<%= req.reward.name.strip.split.join %>-actions">
                     <span>
                                 <%= link_to reward_reward_request_path(req.reward, req, approved: true),
-                                remote: true, method: :patch do %><%= icon('fas', 'check') %>Grant<% end %>
+                                remote: true, method: :patch do %><%= icon('fas', 'check') %> Grant<% end %>
                               </span>
                     <span>
                                 <%= link_to reward_reward_request_path(req.reward, req, approved: false),
-                                remote: true, method: :patch do %><%= icon('fas', 'times') %> Say No<% end %>
+                                remote: true, method: :patch do %><%= icon('fas', 'times') %> Nope<% end %>
                               </span>
                 </div>
                 <% else %>
@@ -63,7 +67,7 @@
                         <%= icon('fas', 'check') %>
                         <%#= cl_image_tag 'checked_2' %>
                         <% elsif task.task_submissions.last.state == 0 %>
-                        <%= icon('fas', 'hourglass-start') %>
+                        <%= icon('fas', 'spinner') %>
                         <%#= cl_image_tag 'hourglass', height:32, width:32 %>
                         <% else %>
                         <%= icon('fas', 'times') %>
@@ -128,3 +132,4 @@
         </div>
     </div>
 <% end %>
+</div>

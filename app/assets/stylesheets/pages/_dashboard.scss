@@ -1,24 +1,34 @@
+.children-info {
 
+}
 .each-request {
   border-right: 1px dashed black;
   padding: 10px;
+  min-width: 180px;
+  text-align: center;
 }
 
 .dashboard-wrapper {
-  padding: 0 50px;
+  #welcome-content {
+    padding-top: 20px;
+  }
 
   .welcome-col, .children-list {
     height: calc(100vh - 70px);
     overflow: auto;
-    padding: 0 30px;
+
   }
 
   .children-list {
     padding-top: 25px;
+    padding-left: 40px;
   }
 
   .welcome-col {
     border-right: 1px solid rgba(0,0,0,0.07);
+    background: #fcfcfc;
+    padding: 0 60px;
+
   }
 }
 
@@ -41,13 +51,11 @@
 }
 
 .active-task {
-  background-color: rgba(#78BA00, 0.4);
+  background-color: rgba(0,0,0, 0.1);
 }
 
 .each-task {
   border-radius: 5px;
-  // display:flex;
-  // flex-direction:column;
 }
 
 .dashboard-task-name {
@@ -93,21 +101,37 @@
   display:block;
 }
 
-
+.children-namelist {
+  display: flex;
+  width: 100%;
+}
 
 .each-child {
-  margin-bottom: 50px;
-  display: inline-block;
+  display: block;
+  flex: 1 0 auto;
+  text-align: center;
+  border-radius: 20px 0 20px 0;
+  background-color: rgba(#B7D1F4, 0.4);
+
+  padding: 10px 0;
+  margin: 3px;
+  transition: 250ms;
+  &:hover {
+      cursor: pointer;
+      margin-bottom: 3px;
+    }
 
   .child-name {
-    max-width: 200px;
+    // min-width: 200px;
     margin: 0;
-    padding: 5px 20px;
-    color: #555;
+    // padding: 5px 20px;
+    color: #333;
     font-family: sans-serif;
-    border-radius: 15px 15px 0 0;
 
-    background: rgba(#FFC857, 0.7);
   }
 }
+
+  .selected-child {
+    background-color: rgba(#D6C9F2, 0.8);
+  }
 

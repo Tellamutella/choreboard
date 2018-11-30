@@ -31,7 +31,7 @@ window.findTaskDetails = function ()  {
       allActive.forEach((activeTask) => {
         activeTask.classList.remove("active-task")
       });
-      event.target.classList.add('active-task');
+      task.classList.add('active-task');
       const allDetails = document.querySelectorAll(".task-details")
       allDetails.forEach((detailBox) => {
         detailBox.classList.remove("show-task");
