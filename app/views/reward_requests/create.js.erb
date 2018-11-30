@@ -6,5 +6,5 @@ function requestReward(requestHTML, unlinkHTML) {
 }
 
 <% unless @reward_request.errors.any? %>
-  requestReward(`<%= icon('fas', 'hourglass')%>`, `<%= cl_image_tag @reward.tag, height: 50 %>`);
+  requestReward(`<div style="text-align: center;"> <%= icon('fas', 'hourglass')%> </div>`, `<%= cl_image_tag @reward.tag, height: 50 %>`);
 <% end %>

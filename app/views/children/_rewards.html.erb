@@ -8,22 +8,21 @@
         <div class="each-reward">
           <% if reward.reward_requests.any? %>
               <% if reward.reward_requests.last.state == 0 %>
-                <div><%= reward.name %></div>
                 <div style="text-align:center;"><%= cl_image_tag "#{reward.tag}", height: 50 %></div>
                 <div class="pending" style="text-align: center;"><%= icon('fas', 'hourglass-start')%></div>
 
               <% elsif !reward.claimed %>
 
                 <div id="<%= current_child.name.strip %>-<%= reward.name.strip.split.join %>-request-link">
+                   <div style="text-align"> <%= reward.name %> </div>
                   <%= link_to reward_reward_requests_path(reward), remote: true, method: :post do %>
-                  <%#= reward.name %>
-                  <%= cl_image_tag "#{reward.tag}", height: 50 %>
+                  <div style="text-align:center;"><%= cl_image_tag "#{reward.tag}", height: 50 %></div>
                   <% end %>
                 </div>
 
               <% else %>
-                <%#= reward.name %>
-                <%= cl_image_tag "#{reward.tag}", height: 50 %>
+                 <div style="text-align"> <%= reward.name %> </div>
+                <div style="text-align:center;"><%= cl_image_tag "#{reward.tag}", height: 50 %></div>
                 <div class="claimed" style='color: #2CBE4E; text-align:center; font-size: 22px;'> <%= icon('fas', 'check')%></div>
               <% end %>
 
@@ -31,9 +30,9 @@
 
           <% else %> <!-- no reward requests yet -->
               <div id="<%= current_child.name.strip %>-<%= reward.name.strip.split.join %>-request-link">
+                      <div style="text-align"> <%= reward.name %> </div>
                   <%= link_to reward_reward_requests_path(reward), remote: true, method: :post do %>
-                      <%#= reward.name %>
-                      <%= cl_image_tag "#{reward.tag}", height: 50 %>
+                      <div style="text-align:center;"><%= cl_image_tag "#{reward.tag}", height: 50 %></div>
                   <% end %>
               </div>
 

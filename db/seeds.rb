@@ -12,12 +12,12 @@ Parent.destroy_all
 
 puts "\nCreating Nice Seeds......"
 
-parent1 = Parent.create!(email: 'parent1@gmail.com', password: '123456', password_confirmation: '123456', name: 'Fisher')
+parent1 = Parent.create!(email: 'paul@gmail.com', password: '123456', password_confirmation: '123456', name: 'Paul')
 parent2 = Parent.create!(email: 'parent2@gmail.com', password: '123456', password_confirmation: '123456', name: 'Lee')
 
-child1 = Child.create!(email: 'child1@gmail.com', password: '123456', password_confirmation: '123456', name: 'Lily', parent: parent1)
-child2 = Child.create!(email: 'child2@gmail.com', password: '123456', password_confirmation: '123456', name: 'Ron', parent: parent1)
-child3 = Child.create!(email: 'child3@gmail.com', password: '123456', password_confirmation: '123456', name: 'Ben', parent: parent1)
+child1 = Child.create!(email: 'child1@gmail.com', password: '123456', password_confirmation: '123456', name: 'Edward', parent: parent1)
+child2 = Child.create!(email: 'child2@gmail.com', password: '123456', password_confirmation: '123456', name: 'Lina', parent: parent1)
+child3 = Child.create!(email: 'child3@gmail.com', password: '123456', password_confirmation: '123456', name: 'Dema', parent: parent1)
 
 
 optional_tasks = { "Get A average": "With A+ in math", "Learn a piano piece": "At least a level 6 piece", "Help with cooking": "help at least for 1 hour", 'laundry': "get everything from the laundry basket", "clean public area": "clean the living room/kichten/bathroom"}
@@ -37,10 +37,10 @@ puts "Available longterm rewards: #{big_rewards.count}"
 puts "------------------------------"
 
 parent1.children.each do |child|
-  10.times do
+  3.times do
     task = child.tasks.new(
       parent: child.parent,
-      mandatory: [true, false].sample
+      mandatory: true
       )
     if task.mandatory
       task.objective, task.key_results = mandatory_tasks.to_a.sample
@@ -49,7 +49,7 @@ parent1.children.each do |child|
     end
     task.save
   end
-  10.times do
+  3.times do
     reward = child.rewards.new(
       parent: child.parent,
       price: rand(10..100),
