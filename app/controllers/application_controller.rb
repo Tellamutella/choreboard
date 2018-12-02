@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 
   after_action :verify_authorized, except: [:index, :dashboard, :playground], unless: :skip_pundit?
   after_action :verify_policy_scoped, only: [:index], unless: :skip_pundit?
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   private
 
@@ -24,4 +25,9 @@ class ApplicationController < ActionController::Base
   def default_url_options
     { host: ENV["HOST"] || "localhost:3000" }
   end
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+  end
+
 end
