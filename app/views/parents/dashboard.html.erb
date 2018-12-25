@@ -64,12 +64,15 @@ for (let i = 0; i < test.length; i++) {
     test[i].onclick = function(event) {
         console.log(event.target)
         myFunction(Array.from(test).indexOf(event.target))
+        console.log(Array.from(test).indexOf(event.target));
     };
 }
 
-let closes = document.querySelectorAll(".close")
+let closes = document.querySelectorAll(".modal-close")
 
 let closeModal = function(i) {
+
+  console.log(`close index: ${i}`);
     modal[i].style.display = "none";
 };
 
